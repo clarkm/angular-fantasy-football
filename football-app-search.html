@@ -1,0 +1,193 @@
+<!-- put a form with football players (quarterbacks) here and increment their 'values' similar tomhat the 3rd step does -->
+<style>.active{text-decoration: underline;}</style>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.0.5/angular.min.js"></script>
+<script>
+	var app = angular.module("searchPlayers", []);
+
+	app.filter('searchFor', function () {
+		return function (arr, searchString) {
+			if(!searchString) {
+				return arr;
+			}
+			var result = [];
+			searchString = searchString.toLowerCase();
+			angular.forEach(arr, function (player) {
+				if (player.name.toLowerCase().indexOf(searchString) !== -1){
+					result.push(player);
+				}
+			});
+			return result
+		};
+	});
+
+	app.filter('searchForPosition', function () {
+		return function (arr, searchStringPosition) {
+			if(!searchStringPosition) {
+				return arr;
+			}
+			var result = [];
+			searchStringPosition = searchStringPosition.toLowerCase();
+			angular.forEach(arr, function (player) {
+				if (player.position.toLowerCase().indexOf(searchStringPosition) !== -1){
+					result.push(player);
+				}
+			});
+			return result
+		};
+	});
+
+	app.filter('searchForActive', function () {
+		return function (arr, searchStringActive) {
+			if(!searchStringActive) {
+				return arr;
+			}
+			var result = [];
+			searchStringActive = searchStringActive.toLowerCase();
+			angular.forEach(arr, function (player) {
+				if (player.active.toLowerCase().indexOf(searchStringActive) !== -1){
+					result.push(player);
+				}
+			});
+			return result
+		};
+	});
+
+	function playersController ($scope) {
+		$scope.players = [
+			{
+				name : 'Peyton Manning',
+				position: 'Quarterback',
+				value: 1,
+				active:true
+			},{
+				name : 'Tom Brady',
+				position: 'Quarterback',
+				value: 2,
+				active:false
+			},{
+				name : 'Drew Brees',
+				position: 'Quarterback',
+				value: 3,
+				active:true
+			},{
+				name : 'Aaron Rogers',
+				position: 'Quarterback',
+				value: 4,
+				active:true
+			},{
+				name : 'Cam Newton',
+				position: 'Quarterback',
+				value: 5,
+				active:true
+			},{
+				name : 'Robert Griffin III',
+				position: 'Quarterback',
+				value: 6,
+				active:true
+			},{
+				name : 'Adrian Peterson',
+				position: 'Runningback',
+				value: 1,
+				active:false
+			},{
+				name : 'Arian Foster',
+				position: 'Runningback',
+				value: 2,
+				active:true
+			},{
+				name : 'Jammal Charles',
+				position: 'Runningback',
+				value: 3,
+				active:true
+			},{
+				name : 'Fred Jackson',
+				position: 'Runningback',
+				value: 4,
+				active:true
+			},{
+				name : 'Alfred Morris',
+				position: 'Runningback',
+				value: 5,
+				active:true
+			},{
+				name : 'Ray Rice',
+				position: 'Runningback',
+				value: 6,
+				active:true
+			},{
+				name : 'Calvin Johnson',
+				position: 'Wide Receiver',
+				value: 1,
+				active:false
+			},{
+				name : 'Percy Harvin',
+				position: 'Wide Receiver',
+				value: 2,
+				active:true
+			},{
+				name : 'DeSean Jackson',
+				position: 'Wide Receiver',
+				value: 3,
+				active:true
+			},{
+				name : 'Pierre Garson',
+				position: 'Wide Receiver',
+				value: 4,
+				active:true
+			},{
+				name : 'Michael Crabtree',
+				position: 'Wide Receiver',
+				value: 5,
+				active:true
+			},{
+				name : 'Victor Cruz',
+				position: 'Wide Receiver',
+				value: 6,
+				active:true
+			}
+		]
+	$scope.predicate = '-position';
+
+
+		$scope.toggleActive = function (s) {
+			s.active = !s.active;
+		}
+
+		$scope.total = function () {
+			var total = 0;
+
+			angular.forEach($scope.players, function (s) {
+				if (s.active) {
+					total+= s.value;
+				}
+			});
+			return total;
+		};
+
+	}
+</script>
+
+<div ng-app="searchPlayers" ng-controller="playersController">
+
+	<h2>Players</h2>
+
+	<input type="text" ng-model="searchString" placeholder="Search Player Name" />
+	<input type="text" ng-model="searchStringPosition" placeholder="Search Player Position" />
+	<input type="text" ng-model="searchStringActive" placeholder="Search Player Active" />
+
+	<br />
+	<a href="#0" ng-click="predicate = 'position'; reverse=!reverse">Position</a>
+	<a href="#0" ng-click="predicate = 'name'; reverse=!reverse">Name</a>
+	<a href="#0" ng-click="predicate = 'value'; reverse=!reverse">Value</a>
+
+	<ul>
+		<li ng-repeat="player in players | searchFor:searchString | searchForPosition:searchStringPosition | searchForActive:searchStringActive | orderBy:predicate:reverse" ng-click="toggleActive(player)" ng-class="{active:player.active}">
+			{{player.position}}: {{player.name}} <span>{{player.value}}</span>
+		</li>
+	</ul>
+
+	<div class="total">Total: {{total()}}</div>
+
+</div>
+
+
