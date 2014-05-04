@@ -1,5 +1,4 @@
-<!-- put a form with football players (quarterbacks) here and increment their 'values' similar tomhat the 3rd step does -->
-<style>.active{text-decoration: underline;}</style>
+<style></style>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.0.5/angular.min.js"></script>
 <script>
 	var app = angular.module("searchPlayers", []);
@@ -63,7 +62,7 @@
 				name : 'Tom Brady',
 				position: 'Quarterback',
 				value: 2,
-				active:false
+				active:true
 			},{
 				name : 'Drew Brees',
 				position: 'Quarterback',
@@ -88,7 +87,7 @@
 				name : 'Adrian Peterson',
 				position: 'Runningback',
 				value: 1,
-				active:false
+				active:true
 			},{
 				name : 'Arian Foster',
 				position: 'Runningback',
@@ -118,7 +117,7 @@
 				name : 'Calvin Johnson',
 				position: 'Wide Receiver',
 				value: 1,
-				active:false
+				active:true
 			},{
 				name : 'Percy Harvin',
 				position: 'Wide Receiver',
@@ -164,6 +163,21 @@
 			return total;
 		};
 
+		$scope.teams = [];
+		$scope.addTeam = function() {
+		    $scope.teams.push({text:$scope.teamText});
+		    $scope.teamText = '';
+		  };
+
+		 $scope.archive = function() {
+
+		    $scope.teams = [];
+	      $scope.teams.push(team);
+
+		  };
+
+		 
+
 	}
 </script>
 
@@ -171,22 +185,41 @@
 
 	<h2>Players</h2>
 
+	search:
 	<input type="text" ng-model="searchString" placeholder="Search Player Name" />
 	<input type="text" ng-model="searchStringPosition" placeholder="Search Player Position" />
-	<input type="text" ng-model="searchStringActive" placeholder="Search Player Active" />
+	<input type="checkbox" ng-model="searchStringActive" />
 
 	<br />
+	
+	sort:
 	<a href="#0" ng-click="predicate = 'position'; reverse=!reverse">Position</a>
 	<a href="#0" ng-click="predicate = 'name'; reverse=!reverse">Name</a>
 	<a href="#0" ng-click="predicate = 'value'; reverse=!reverse">Value</a>
 
 	<ul>
-		<li ng-repeat="player in players | searchFor:searchString | searchForPosition:searchStringPosition | searchForActive:searchStringActive | orderBy:predicate:reverse" ng-click="toggleActive(player)" ng-class="{active:player.active}">
+		<li ng-repeat="player in players | searchFor:searchString | searchForPosition:searchStringPosition | searchForActive:searchStringActive | orderBy:predicate:reverse" ng-class="{active:player.active}">
+		<input type="checkbox" checked ng-click="toggleActive(player)" />
 			{{player.position}}: {{player.name}} <span>{{player.value}}</span>
 		</li>
 	</ul>
 
-	<div class="total">Total: {{total()}}</div>
+	<div class="total">Total Value: {{total()}}</div>
+
+
+	<form ng-submit="addTeam()">
+        <input type="text" ng-model="teamText" size="30"
+               placeholder="add team here">
+        <input type="submit" value="add">
+      </form>
+
+      <ul>
+        <li ng-repeat="team in teams">
+
+          <span class="">{{team.text}}</span>
+          <span ng-click="archive()">delete?</span>
+        </li>
+      </ul>
 
 </div>
 
