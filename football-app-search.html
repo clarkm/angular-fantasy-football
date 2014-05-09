@@ -1,5 +1,5 @@
 <style></style>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.0.5/angular.min.js"></script>
+<script src="angular.min.js"></script>
 <script>
 	var app = angular.module("searchPlayers", []);
 
@@ -51,107 +51,27 @@
 		};
 	});
 
-	function playersController ($scope) {
-		$scope.players = [
-			{
-				name : 'Peyton Manning',
-				position: 'Quarterback',
-				value: 1,
-				active:true
-			},{
-				name : 'Tom Brady',
-				position: 'Quarterback',
-				value: 2,
-				active:true
-			},{
-				name : 'Drew Brees',
-				position: 'Quarterback',
-				value: 3,
-				active:true
-			},{
-				name : 'Aaron Rogers',
-				position: 'Quarterback',
-				value: 4,
-				active:true
-			},{
-				name : 'Cam Newton',
-				position: 'Quarterback',
-				value: 5,
-				active:true
-			},{
-				name : 'Robert Griffin III',
-				position: 'Quarterback',
-				value: 6,
-				active:true
-			},{
-				name : 'Adrian Peterson',
-				position: 'Runningback',
-				value: 1,
-				active:true
-			},{
-				name : 'Arian Foster',
-				position: 'Runningback',
-				value: 2,
-				active:true
-			},{
-				name : 'Jammal Charles',
-				position: 'Runningback',
-				value: 3,
-				active:true
-			},{
-				name : 'Fred Jackson',
-				position: 'Runningback',
-				value: 4,
-				active:true
-			},{
-				name : 'Alfred Morris',
-				position: 'Runningback',
-				value: 5,
-				active:true
-			},{
-				name : 'Ray Rice',
-				position: 'Runningback',
-				value: 6,
-				active:true
-			},{
-				name : 'Calvin Johnson',
-				position: 'Wide Receiver',
-				value: 1,
-				active:true
-			},{
-				name : 'Percy Harvin',
-				position: 'Wide Receiver',
-				value: 2,
-				active:true
-			},{
-				name : 'DeSean Jackson',
-				position: 'Wide Receiver',
-				value: 3,
-				active:true
-			},{
-				name : 'Pierre Garson',
-				position: 'Wide Receiver',
-				value: 4,
-				active:true
-			},{
-				name : 'Michael Crabtree',
-				position: 'Wide Receiver',
-				value: 5,
-				active:true
-			},{
-				name : 'Victor Cruz',
-				position: 'Wide Receiver',
-				value: 6,
-				active:true
-			}
-		]
-	$scope.predicate = '-position';
+/*
+	  var json = $http.get('aircraft.json').then(function(response) {
+        $scope.avaliableAircraft = response.data;
+        return response.data;
+      });*/
+	
+	app.controller ('playersController',['$scope','$http', function ($scope,$http) {
+
+
+		$scope.players = [];
+		var json = $http.get('players.json').then(function (response) {
+			document.player = response.data;
+			$scope.players = response.data;
+		});
+		$scope.predicate = '-position';
 
 
 		$scope.toggleActive = function (s) {
 			s.active = !s.active;
 		}
-
+ 
 		$scope.total = function () {
 			var total = 0;
 
@@ -164,21 +84,24 @@
 		};
 
 		$scope.teams = [];
+
 		$scope.addTeam = function() {
-		    $scope.teams.push({text:$scope.teamText});
+		    $scope.teams.push({text:$scope.teamText, players:[]});
 		    $scope.teamText = '';
 		  };
 
-		 $scope.archive = function() {
+		 $scope.archive = function(team) {
+		 	var index = $scope.teams.indexOf(team);
+		 	if (index != -1) {
+		 		$scope.teams.splice(index,1);
+		 	}
 
-		    $scope.teams = [];
-	      $scope.teams.push(team);
+		  } 
 
-		  };
+		}
+	])
 
-		 
-
-	}
+	
 </script>
 
 <div ng-app="searchPlayers" ng-controller="playersController">
@@ -200,7 +123,7 @@
 	<ul>
 		<li ng-repeat="player in players | searchFor:searchString | searchForPosition:searchStringPosition | searchForActive:searchStringActive | orderBy:predicate:reverse" ng-class="{active:player.active}">
 		<input type="checkbox" checked ng-click="toggleActive(player)" />
-			{{player.position}}: {{player.name}} <span>{{player.value}}</span>
+			{{player.position}}: {{player.name}} <span>{{player.value}}</span> <button ng-click="draft(player)">Draft</button>
 		</li>
 	</ul>
 
@@ -217,7 +140,10 @@
         <li ng-repeat="team in teams">
 
           <span class="">{{team.text}}</span>
-          <span ng-click="archive()">delete?</span>
+          <ul>
+          	<li ng-repeat='player in team.players'>{{player.name}}</li>
+          </ul>
+          <button ng-click="archive(team)">delete?</button>
         </li>
       </ul>
 
