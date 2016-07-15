@@ -1,4 +1,6 @@
-<style></style>
+<style>
+
+</style>
 <script src="angular.min.js"></script>
 <script>
 	var app = angular.module("searchPlayers", []);
@@ -61,8 +63,8 @@
 
 
 		$scope.players = [];
-		var json = $http.get('players.json').then(function (response) {
-			document.player = response.data;
+		var json = $http.get('short-list.json').then(function (response) {
+			//document.player = response.data;
 			$scope.players = response.data;
 		});
 		$scope.predicate = '-position';
@@ -83,20 +85,60 @@
 			return total;
 		};
 
-		$scope.teams = [];
 
-		$scope.addTeam = function() {
-		    $scope.teams.push({text:$scope.teamText, players:[]});
-		    $scope.teamText = '';
-		  };
 
-		 $scope.archive = function(team) {
-		 	var index = $scope.teams.indexOf(team);
-		 	if (index != -1) {
-		 		$scope.teams.splice(index,1);
-		 	}
 
-		  } 
+    // Team List Arrays
+    $scope.teams = [];
+    $scope.checked = [];
+
+    // Add a Team to the list
+    $scope.addTeam = function () {
+        $scope.teams.push({
+            name: $scope.teamName
+        });
+        // Clear input fields after push
+        $scope.teamName = "";
+    };
+    // Add Team to Checked List and delete from Unchecked List
+    $scope.toggleChecked = function (index) {
+        $scope.checked.push($scope.teams[index]);
+        $scope.teams.splice(index, 1);
+    };
+    // Add Team to unChecked List and delete from checked List
+    $scope.unCheck = function (index) {
+        $scope.teams.push($scope.checked[index]);
+        $scope.checked.splice(index, 1);
+    };
+    // Get Total Teams
+    $scope.getTotalTeams = function () {
+        return $scope.teams.length;
+    };
+    // Get Total Checked Teams
+    $scope.getTotalCheckedTeams = function () {
+        return $scope.checked.length;
+    };
+
+
+
+
+    $scope.teams = [1,2,3,4,5];
+    $scope.checked = [];
+
+
+    $scope.toggleDrafted = function (index) {
+        $scope.checked.push($scope.players[index]);
+        $scope.players.splice(index, 1);
+    };
+    
+
+    // Add Team to unChecked List and delete from checked List
+    $scope.unCheck = function (index) {
+        $scope.teams.push($scope.checked[index]);
+        $scope.checked.splice(index, 1);
+    };
+
+
 
 		}
 	])
@@ -111,7 +153,7 @@
 	search:
 	<input type="text" ng-model="searchString" placeholder="Search Player Name" />
 	<input type="text" ng-model="searchStringPosition" placeholder="Search Player Position" />
-	<input type="checkbox" ng-model="searchStringActive" />
+	<input type="text" ng-model="searchStringActive" placeholder="type active" />
 
 	<br />
 	
@@ -123,29 +165,60 @@
 	<ul>
 		<li ng-repeat="player in players | searchFor:searchString | searchForPosition:searchStringPosition | searchForActive:searchStringActive | orderBy:predicate:reverse" ng-class="{active:player.active}">
 		<input type="checkbox" checked ng-click="toggleActive(player)" />
-			{{player.position}}: {{player.name}} <span>{{player.value}}</span> <button ng-click="draft(player)">Draft</button>
+			{{player.position}}: {{player.name}} <span>{{player.value}}</span> <button ng-click="toggleDrafted($index)">Draft</button>
 		</li>
 	</ul>
 
 	<div class="total">Total Value: {{total()}}</div>
 
 
-	<form ng-submit="addTeam()">
-        <input type="text" ng-model="teamText" size="30"
-               placeholder="add team here">
-        <input type="submit" value="add">
-      </form>
+<h3>drafed:</h3>
+<ul>
+	<li ng-repeat"player in drafed">{{player.name}}</li>
+</ul>
+	      
+        <div id="AddTeam">
+             <h3>Add Team</h3>
 
-      <ul>
-        <li ng-repeat="team in teams">
 
-          <span class="">{{team.text}}</span>
-          <ul>
-          	<li ng-repeat='player in team.players'>{{player.name}}</li>
-          </ul>
-          <button ng-click="archive(team)">delete?</button>
-        </li>
-      </ul>
+            <input value="" type="text" placeholder="Name of Team" ng-model="teamName" value="team">
+            <br/>
+            <button ng-click="addTeam()">Add to list</button>
+        </div>
+        <!-- begin: LIST OF CHECKED TEAMS -->
+        <div id="CheckedList">
+             <h3>Checked Teams: {{getTotalCheckedTeams()}}</h3>
+
+             <h4>Checked:</h4>
+
+            <table>
+                <tr ng-repeat="team in checked" class="team-checked">
+
+                    <td><b>name:</b> {{team.name}} -</td>
+                    <td> <i>this team is checked!</i>
+
+                    </td>
+                    <td><button ng-click="unCheck($index)">uncheck team</button></td>
+                </tr>
+            </table>
+        </div>
+        <!-- end: LIST OF CHECKED TEAMS -->
+        <!-- begin: LIST OF UNCHECKED TEAMS -->
+        <div id="UncheckedList">
+             <h3>Unchecked Teams: {{getTotalTeams()}}</h3>
+
+             <h4>Unchecked:</h4>
+
+            <table>
+                <tr ng-repeat="team in teams" class="team-unchecked">
+
+                    <td><b>name:</b> {{team.name}} -</td>
+                    <td>
+                        <button ng-click="toggleChecked($index)">check team</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
 </div>
 

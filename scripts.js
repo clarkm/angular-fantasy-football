@@ -15,11 +15,12 @@ app.factory('myService', function($http) {
   return myService;
 });
 
-//clark
-app.controller('appController2', ['myService', '$scope','$http',
+
+app.controller('appController', ['myService', '$scope','$http',
 
     function (myService, $scope, $http){
         var vm = this;
+
 
         vm.selectedTeam = null;
         vm.players = [];
@@ -67,21 +68,23 @@ app.controller('appController2', ['myService', '$scope','$http',
         vm.trash = [];
 
         index2 = 0;
-
         vm.addPlayer = function(index, item){
             vm.players.splice(index, 1);
             console.log('index2: ' + index2);
 
             if (vm.selectedTeam !== null){
+
+                // checks to see if it's the last team.....
+                if (index2 > vm.teams.length - 1) {
+                    console.log('going back to 0');
+                      index2 = 0;
+                      vm.selectedTeam = vm.teams[0];
+                }
+
                 vm.selectedTeam.players.push(item);
                 index2 = index2 + 1;
                 vm.selectedTeam = vm.teams[index2];
                 return;
-            }
-
-            if (index2 > vm.teams.length - 1) {
-                index2 = 0;
-                vm.selectedTeam = vm.teams[0];
             }
 
             // onclick, vm.index = index2.index

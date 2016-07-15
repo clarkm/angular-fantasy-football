@@ -6,51 +6,15 @@
 				"active":true
 			},
 			{
-				"name" : "Peyton Manning",
+				"name" : "Aaron Rodger",
 				"position": "Quarterback",
-				"value": 1,
+				"value": 2,
 				"active":false
 			},
 			{
-				"name" : "Peyton Manning",
+				"name" : "Drew Brees",
 				"position": "Quarterback",
-				"value": 1,
-				"active":true
-			},
-			{
-				"name" : "Peyton Manning",
-				"position": "Quarterback",
-				"value": 1,
-				"active":true
-			},
-			{
-				"name" : "Peyton Manning",
-				"position": "Quarterback",
-				"value": 1,
-				"active":true
-			},
-			{
-				"name" : "Peyton Manning",
-				"position": "Quarterback",
-				"value": 1,
-				"active":true
-			},
-			{
-				"name" : "Peyton Manning",
-				"position": "Quarterback",
-				"value": 1,
-				"active":false
-			},
-			{
-				"name" : "Peyton Manning",
-				"position": "Quarterback",
-				"value": 1,
-				"active":true
-			},
-			{
-				"name" : "Peyton Manning",
-				"position": "Quarterback",
-				"value": 1,
+				"value": 3,
 				"active":true
 			},
 			{
@@ -104,6 +68,42 @@
 			{
 				"name" : "Peyton Manning",
 				"position": "Quarterback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Peyton Manning",
+				"position": "Quarterback",
+				"value": 1,
+				"active":false
+			},
+			{
+				"name" : "Peyton Manning",
+				"position": "Quarterback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Peyton Manning",
+				"position": "Quarterback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Peyton Manning",
+				"position": "Quarterback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Peyton Manning",
+				"position": "Quarterback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Jammal Charlesg",
+				"position": "Runningback",
 				"value": 1,
 				"active":true
 			}
