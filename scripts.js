@@ -25,10 +25,10 @@ app.controller('appController', ['myService', '$scope','$http',
         vm.selectedTeam = null;
         vm.players = [];
 
-        myService.players().then(function(d){
-            vm.players = d;
+        myService.players().then(function(data){
+            vm.players = data;
         });
-        console.log(vm.players);
+        console.log('players:' + vm.players);
 
         //console.log(vm.players);
 
@@ -40,20 +40,28 @@ app.controller('appController', ['myService', '$scope','$http',
             /* make a function so when a row is clicked, index2 becomes that row's 'absolute'/original index.
             then the addItem function will add it correctly to the right team. */
 
+
+            vm.index2 = 0;
+
+
         vm.teams = [];
         vm.addTeam = function (teamString) {
             console.log('selected team: ' + vm.selectedTeam);
             vm.teams.push({
-            selected: false,
-            name: teamString,
-            players: []
+              selected: false,
+              name: teamString,
+              players: []
             });
+            vm.selectedTeam = vm.teams[vm.index2];
         };
 
         vm.updateSelectedTeam = function (team){
+
             if (vm.selectedTeam === team){
                 //vm.selectedTeam.selected = !vm.selectedTeam.selected;
-                vm.selectedTeam.selected = True;
+                //vm.selectedTeam.selected = True;
+                vm.index2 += 1;
+                console.log(team);
                 return;
             }
             // if (vm.selectedTeam !== null){
@@ -67,32 +75,39 @@ app.controller('appController', ['myService', '$scope','$http',
 
         vm.trash = [];
 
-        index2 = 0;
         vm.addPlayer = function(index, item){
             vm.players.splice(index, 1);
-            console.log('index2: ' + index2);
+            console.log('index2: ' + vm.index2);
 
             if (vm.selectedTeam !== null){
 
                 // checks to see if it's the last team.....
-                if (index2 > vm.teams.length - 1) {
+                if (vm.index2 > vm.teams.length - 1) {
                     console.log('going back to 0');
-                      index2 = 0;
-                      vm.selectedTeam = vm.teams[0];
+                    vm.selectedTeam = vm.teams[vm.index2];
                 }
 
                 vm.selectedTeam.players.push(item);
-                index2 = index2 + 1;
-                vm.selectedTeam = vm.teams[index2];
+                vm.index2 += 1;
+                if (vm.index2 % vm.teams.length === 0) {
+                  vm.index2 = 0;
+                }
+                vm.selectedTeam = vm.teams[vm.index2];
                 return;
             }
 
+            if (vm.index2 === 0) {
+              console('never hits this');
+              vm.teams[0].addClass('selected');
+            }
+
             // onclick, vm.index = index2.index
-            vm.teams[index2].players.push(item);
-            index2 = index2 + 1;
-            vm.selectedTeam = vm.teams[index2];
+            vm.teams[vm.index2].players.push(item);
+            vm.index2 = vm.index2 + 1;
+            vm.selectedTeam = vm.teams[vm.index2];
 
         };
+
 
         vm.removePlayer = function(item, team, index){
             // coming through in the wrong format or something....
