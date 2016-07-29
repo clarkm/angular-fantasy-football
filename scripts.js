@@ -57,7 +57,9 @@ app.controller('appController', ['myService', '$scope','$http',
 
         vm.updateSelectedTeam = function (team){
 
-            if (vm.selectedTeam === team){
+            vm.index2 = team;
+
+            if (vm.selectedTeam === vm.index2){
                 //vm.selectedTeam.selected = !vm.selectedTeam.selected;
                 //vm.selectedTeam.selected = True;
                 vm.index2 += 1;
