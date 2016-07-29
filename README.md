@@ -3,9 +3,10 @@ angular-fantasy-football
 
 fantasy football app with angularjs
 
-bug: the 1st team won't outline red when it's active -- the html seems to be broken
-bug: the 'selected' varible never changes from 'false'
-bug: after a team is selected, it adds a player to it, then adds a player to that same team again
+[X] bug: the 1st team won't outline red when it's active -- the html seems to be broken
+[X] *OBE* bug: after a team is manually selected, it adds a player to it, then adds a player to that same team again
+[ ] if a team is manually selected, after a selection is made, the next team is not automatically selected
+[ ] *unimportant* bug: the 'selected' variable never changes from 'false'
 
 to do:
 [X] move player dictionary controller into new script<br />
@@ -20,3 +21,6 @@ to do:
 
 make it so there is an active team
 when a user click's draft, the player will go to the active team's roster
+
+
+if it's the 2nd to last index, set been added to 2

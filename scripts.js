@@ -57,20 +57,19 @@ app.controller('appController', ['myService', '$scope','$http',
 
         vm.updateSelectedTeam = function (team){
 
-            vm.index2 = team;
-
             if (vm.selectedTeam === vm.index2){
-                //vm.selectedTeam.selected = !vm.selectedTeam.selected;
-                //vm.selectedTeam.selected = True;
                 vm.index2 += 1;
                 console.log(team);
                 return;
             }
-            // if (vm.selectedTeam !== null){
-            //     vm.selectedTeam.selected = !vm.selectedTeam.selected;
-            // }
+
             vm.selectedTeam = team;
             vm.selectedTeam.selected = !vm.selectedTeam.selected;
+
+            vm.index2 += 1;
+            if (vm.index2 % vm.teams.length === 0) {
+              vm.index2 = 0;
+            }
 
         };
 
@@ -79,7 +78,6 @@ app.controller('appController', ['myService', '$scope','$http',
 
         vm.addPlayer = function(index, item){
             vm.players.splice(index, 1);
-            console.log('index2: ' + vm.index2);
 
             if (vm.selectedTeam !== null){
 
