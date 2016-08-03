@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>  
+  <head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+<script type="text/javascript">
+var app = angular.module("MyApp", []);
+app.controller("mainController",
+function ($scope) {
+
+    // Team List Arrays
+    $scope.teams = [1,2,3,4,5];
+    $scope.checked = [];
+
+    // Add Team to Checked List and delete from Unchecked List
+    $scope.toggleDrafted = function (index) {
+        $scope.checked.push($scope.teams[index]);
+        $scope.teams.splice(index, 1);
+    };
+    
+
+    // Add Team to unChecked List and delete from checked List
+    $scope.unCheck = function (index) {
+        $scope.teams.push($scope.checked[index]);
+        $scope.checked.splice(index, 1);
+    };
+
+
+});
+</script>
+
+</head>
+
+<body ng-app="MyApp" class="ng-scope">
+    <div id="MyApp" ng-controller="mainController">
+
+      <!-- begin: LIST OF UNCHECKED TEAMS -->
+        <div id="UncheckedList">
+             <h3>Undrafted Players: {{getTotalTeams()}}</h3>
+
+             <h4>Undrafted:</h4>
+
+            <table>
+                <tr ng-repeat="team in teams" class="team-unchecked">
+
+                    <td>{{team}} -</td>
+                    <td>
+                        <button ng-click="toggleDrafted($index)">Draft Player</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- end: LIST OF TEAMS -->
+
+        <!-- begin: LIST OF CHECKED TEAMS -->
+        <div id="DraftedList">
+             <h3>Drafted Teams: {{getTotalCheckedTeams()}}</h3>
+
+             <h4>drafted:</h4>
+
+            <table>
+                <tr ng-repeat="team in checked" class="team-checked">
+
+                    <td><b>name:</b> {{team.name}} -</td>
+                    <td> <i>this player is drafted!</i>
+
+                    </td>
+                    <td><button ng-click="unCheck($index)">Undo</button></td>
+                </tr>
+            </table>
+        </div>
+        <!-- end: LIST OF CHECKED TEAMS -->
+
+
+
+        </div>
+
+
+
+
+</body></html>

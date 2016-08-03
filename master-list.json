@@ -1,0 +1,482 @@
+[
+			{
+				"name" : "Peyton Manning",
+				"position": "Quarterback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Aaron Rodgers",
+				"position": "Quarterback",
+				"value": 2,
+				"active":true
+			},
+			{
+				"name" : "Drew Brees",
+				"position": "Quarterback",
+				"value": 3,
+				"active":true
+			},
+			{
+				"name" : "Matthew Stafford",
+				"position": "Quarterback",
+				"value": 4,
+				"active":true
+			},
+			{
+				"name" : "Andrew Luck",
+				"position": "Quarterback",
+				"value": 5,
+				"active":true
+			},
+			{
+				"name" : "Nick Foles",
+				"position": "Quarterback",
+				"value": 6,
+				"active":true
+			},
+			{
+				"name" : "Cam Newton",
+				"position": "Quarterback",
+				"value": 7,
+				"active":true
+			},
+			{
+				"name" : "Matt Ryan",
+				"position": "Quarterback",
+				"value": 8,
+				"active":true
+			},
+			{
+				"name" : "Robert Griffin III",
+				"position": "Quarterback",
+				"value": 9,
+				"active":true
+			},
+			{
+				"name" : "Tom Brady",
+				"position": "Quarterback",
+				"value": 10,
+				"active":true
+			},
+			{
+				"name" : "Colin Kaepernick",
+				"position": "Quarterback",
+				"value": 11,
+				"active":true
+			},
+			{
+				"name" : "Tony Romo",
+				"position": "Quarterback",
+				"value": 12,
+				"active":true
+			},
+			{
+				"name" : "Russell Wilson",
+				"position": "Quarterback",
+				"value": 13,
+				"active":true
+			},
+			{
+				"name" : "Jay Cutler",
+				"position": "Quarterback",
+				"value": 14,
+				"active":true
+			},
+			{
+				"name" : "Philip Rivers",
+				"position": "Quarterback",
+				"value": 15,
+				"active":true
+			},
+			{
+				"name" : "Ben Roethlisberger",
+				"position": "Quarterback",
+				"value": 16,
+				"active":true
+			},
+			{
+				"name" : "Andy Dalton",
+				"position": "Quarterback",
+				"value": 17,
+				"active":true
+			},
+			{
+				"name" : "Ryan Tannehill",
+				"position": "Quarterback",
+				"value": 18,
+				"active":true
+			},
+			{
+				"name" : "Alex Smith",
+				"position": "Quarterback",
+				"value": 19,
+				"active":true
+			},
+			{
+				"name" : "Eli Manning",
+				"position": "Quarterback",
+				"value": 20,
+				"active":true
+			},
+			{
+				"name" : "Carson Palmer",
+				"position": "Quarterback",
+				"value": 21,
+				"active":true
+			},
+			{
+				"name" : "Johnny Manziel",
+				"position": "Quarterback",
+				"value": 22,
+				"active":true
+			},
+			{
+				"name" : "Joe Flacco",
+				"position": "Quarterback",
+				"value": 23,
+				"active":true
+			},
+			{
+				"name" : "Josh McCown",
+				"position": "Quarterback",
+				"value": 24,
+				"active":true
+			},
+			{
+				"name" : "Sam Bradford",
+				"position": "Quarterback",
+				"value": 25,
+				"active":true
+			},
+			{
+				"name" : "E.J. Manuel",
+				"position": "Quarterback",
+				"value": 26,
+				"active":true
+			},
+			{
+				"name" : "Jake Locker",
+				"position": "Quarterback",
+				"value": 27,
+				"active":true
+			},
+			{
+				"name" : "Michael Vick",
+				"position": "Quarterback",
+				"value": 28,
+				"active":true
+			},
+			{
+				"name" : "Teddy Bridgewater",
+				"position": "Quarterback",
+				"value": 29,
+				"active":true
+			},
+			{
+				"name" : "Geno Smith",
+				"position": "Quarterback",
+				"value": 30,
+				"active":true
+			},
+			{
+				"name" : "Matt Schaub",
+				"position": "Quarterback",
+				"value": 31,
+				"active":true
+			},
+			{
+				"name" : "Chad Henne",
+				"position": "Quarterback",
+				"value": 32,
+				"active":true
+			},
+			{
+				"name" : "Ryan Fitzpatrick",
+				"position": "Quarterback",
+				"value": 33,
+				"active":true
+			},
+			{
+				"name" : "Brian Hoyer",
+				"position": "Quarterback",
+				"value": 34,
+				"active":true
+			},
+			{
+				"name" : "Mike Glennon",
+				"position": "Quarterback",
+				"value": 35,
+				"active":true
+			},
+			{
+				"name" : "Blake Bortles",
+				"position": "Quarterback",
+				"value": 36,
+				"active":true
+			},
+			{
+				"name" : "Matt Cassel",
+				"position": "Quarterback",
+				"value": 37,
+				"active":true
+			},
+			{
+				"name" : "Mark Sanchez",
+				"position": "Quarterback",
+				"value": 38,
+				"active":true
+			},
+			{
+				"name" : "Terrelle Pryor",
+				"position": "Quarterback",
+				"value": 39,
+				"active":true
+			},
+			{
+				"name" : "Christian Ponder",
+				"position": "Quarterback",
+				"value": 40,
+				"active":true
+			},
+			{
+				"name" : "Jamaal Charles",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "LeSean McCoy",
+				"position": "Runningback",
+				"value": 2,
+				"active":true
+			},
+			{
+				"name" : "Adrian Peterson",
+				"position": "Runningback",
+				"value": 3,
+				"active":true
+			},
+			{
+				"name" : "Matt Forte",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Eddie Lacy",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Marshawn Lynch",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "DeMarco Murray",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Arian Foster",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Le'Veon Bell",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Montee Ball",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Doug Martin",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Giovani Bernard",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Zac Stacy",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Alfred Morris",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Andre Ellington",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "C.J. Spiller",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Reggie Bush",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Ryan Mathews",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Ben Tate",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Frank Gore",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Toby Gerhart",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Rashad Jennings",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Shane Vereen",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Chris Johnson",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Ray Rice",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Bishop Sankey",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Joique Bell",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Knowshon Moreno",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Steven Jackson",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Trent Richardson",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Stevan Ridley",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Maurice Jones-Drew",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Fred Jackson",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Pierre Thomas",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "DeAngelo Williams",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Darren McFadden",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Darren Sproles",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Christopher Ivory",
+				"position": "Runningback",
+				"value": 1,
+				"active":true
+			},
+			{
+				"name" : "Danny Woodhead",
+				"position": "Runningback",
+				"value": 39,
+				"active":true
+			},
+			{
+				"name" : "Lamar Miller",
+				"position": "Runningback",
+				"value": 40,
+				"active":true
+			}
+]

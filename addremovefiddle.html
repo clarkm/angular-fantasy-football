@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>  
+  <head>
+    <style>#MyApp > div {width: 33%;float: left;}</style>
+<!-- http://jsefiddle.net/7n8NR/3/ -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+<script>
+var app = angular.module("MyApp", []);
+app.controller("mainController",
+function ($scope) {
+    // Team List Arrays
+    $scope.teams = [];
+    $scope.checked = [];
+
+    // Add a Team to the list
+    $scope.addTeam = function () {
+        $scope.teams.push({
+            name: $scope.teamName
+        });
+        // Clear input fields after push
+        $scope.teamName = "";
+    };
+
+
+    // Add Team to Checked List and delete from Unchecked List
+    $scope.toggleChecked = function (index) {
+        $scope.checked.push($scope.teams[index]);
+        $scope.teams.splice(index, 1);
+    };
+    
+
+    // Add Team to unChecked List and delete from checked List
+    $scope.unCheck = function (index) {
+        $scope.teams.push($scope.checked[index]);
+        $scope.checked.splice(index, 1);
+    };
+    
+
+    // Get Total Teams
+    $scope.getTotalTeams = function () {
+        return $scope.teams.length;
+    };
+    
+
+    // Get Total Checked Teams
+    $scope.getTotalCheckedTeams = function () {
+        return $scope.checked.length;
+    };
+
+});
+</script>
+
+</head>
+<body ng-app="MyApp" class="ng-scope">
+    <div id="MyApp" ng-controller="mainController">
+        
+        <div id="AddTeam">
+             <h3>Add Player</h3>
+
+
+            <input value="" type="text" placeholder="Name of Player" ng-model="teamName" value="team">
+            <br/>
+            <button ng-click="addTeam()">Add Player to list</button>
+        </div>
+        <!-- begin: LIST OF UNCHECKED TEAMS -->
+        <div id="UncheckedList">
+             <h3>Undrafted Players: {{getTotalTeams()}}</h3>
+
+             <h4>Undrafted:</h4>
+
+            <table>
+                <tr ng-repeat="team in teams" class="team-unchecked">
+
+                    <td><b>name:</b> {{team.name}} -</td>
+                    <td>
+                        <button ng-click="toggleChecked($index)">Draft Player</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- end: LIST OF TEAMS -->
+
+        <!-- begin: LIST OF CHECKED TEAMS -->
+        <div id="DraftedList">
+             <h3>Drafted Teams: {{getTotalCheckedTeams()}}</h3>
+
+             <h4>drafted:</h4>
+
+            <table>
+                <tr ng-repeat="team in checked" class="team-checked">
+
+                    <td><b>name:</b> {{team.name}} -</td>
+                    <td> <i>this player is drafted!</i>
+
+                    </td>
+                    <td><button ng-click="unCheck($index)">Undo</button></td>
+                </tr>
+            </table>
+        </div>
+        <!-- end: LIST OF CHECKED TEAMS -->
+        
+            </div>
+
+
+
+
+</body></html>

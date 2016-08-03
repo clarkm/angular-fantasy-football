@@ -1,9 +1,9 @@
-var app = angular.module("app", []);
+var app = angular.module("app", ['ngMaterial']);
 app.factory('myService', function($http) {
   var myService = {
     players: function() {
       // $http returns a promise, which has a then function, which also returns a promise
-      var promise = $http.get('master-list.json').then(function (response) {
+      var promise = $http.get('output.json').then(function (response) {
         // The then function here is an opportunity to modify the response
         // The return value gets picked up by the then in the controller.
         return response.data;
@@ -122,20 +122,22 @@ app.controller('appController', ['myService', '$scope','$http',
 ]);
 
 app.filter('searchFor', function(){
-    return function(arr, searchString){
-        if(!searchString){
-            return arr;
-        }
-        var result = [];
-        searchString = searchString.toLowerCase();
 
-        angular.forEach(arr, function(item){
-            if(item.name.toLowerCase().indexOf(searchString) !== -1){
-                result.push(item);
-            }
-        });
-
-        return result;
-    };
+  return function(arr, searchString){
+      if(!searchString){
+          return arr;
+      }
+      var result = [];
+      searchString = searchString.toLowerCase();
+      angular.forEach(arr, function(item){
+          if(
+              angular.isDefined(item.name) &&
+              item.name.toLowerCase().indexOf(searchString) !== -1
+          ){
+              result.push(item);
+          }
+      });
+      return result;
+  };
 
 });
