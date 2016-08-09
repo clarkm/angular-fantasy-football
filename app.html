@@ -113,7 +113,7 @@
                   .playertable {width: 35%;}.playertable td, .playertable th {width: 16.6666667%;text-align: center;}
                   </style>
 
-                <input type="text" placeholder="Search players" ng-model="vm.searchPlayers">
+                <input type="text" placeholder="Search players" ng-model="vm.searchTerm">
 
                 <table class="playertable">
                   <thead>
@@ -139,7 +139,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="playerrow" ng-repeat="player in vm.players | orderBy:sortType:sortReverse | filter:vm.searchPlayers track by $index">
+                    <tr class="playerrow" ng-repeat="player in vm.players | orderBy:sortType:sortReverse | filter:vm.searchTerm track by $index">
                       <td>{{player.rank}}</td> <td>{{player.name}}</td> <td>{{player.pos}}</td> <td>{{player.team}}</td> <td>{{player.bye}}</td>
                       <td><button ng-click="vm.addPlayer($index, player)">Add Player</button></td>
                     </tr>

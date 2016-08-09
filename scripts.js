@@ -16,14 +16,14 @@ app.factory('myService', function($http) {
 });
 
 
-app.controller('appController', ['myService', '$scope','$http',
+app.controller('appController', ['myService', '$scope','$http','$filter',
 
-    function (myService, $scope, $http){
+    function (myService, $scope, $http, $filter){
         var vm = this;
 
         vm.sortType = 'name';
         vm.sortReverse = false;
-        vm.searchPlayers = '';
+        vm.searchTerm = '';
         vm.addActive = false;
         vm.disableTeamCreator = false;
 
@@ -42,8 +42,6 @@ app.controller('appController', ['myService', '$scope','$http',
             vm.newItem = null;
         };
 
-            /* make a function so when a row is clicked, index2 becomes that row's 'absolute'/original index.
-            then the addItem function will add it correctly to the right team. */
 
             vm.index2 = 0;
 
@@ -67,9 +65,9 @@ app.controller('appController', ['myService', '$scope','$http',
         };
 
         vm.updateSelectedTeam = function (team){
-
+            vm.index2 = vm.teams.indexOf(team) ;
             if (vm.selectedTeam === vm.index2){
-                vm.index2 += 1;
+
                 console.log(team);
                 return;
             }
@@ -77,7 +75,7 @@ app.controller('appController', ['myService', '$scope','$http',
             vm.selectedTeam = team;
             vm.selectedTeam.selected = !vm.selectedTeam.selected;
 
-            vm.index2 += 1;
+
             if (vm.index2 % vm.teams.length === 0) {
               vm.index2 = 0;
             }
@@ -89,8 +87,8 @@ app.controller('appController', ['myService', '$scope','$http',
 
         vm.addPlayer = function(index, item){
           if (vm.addActive) {
+              var index = vm.players.indexOf(item);
               vm.players.splice(index, 1);
-
               if (vm.selectedTeam !== null){
 
                   // checks to see if it's the last team.....
@@ -108,15 +106,17 @@ app.controller('appController', ['myService', '$scope','$http',
                   return;
               }
 
-              if (vm.index2 === 0) {
-                console('never hits this');
-                vm.teams[0].addClass('selected');
-              }
+              // if (vm.index2 === 0) {
+              //   console('never hits this');
+              //   vm.teams[0].addClass('selected');
+              // }
 
             // onclick, vm.index = index2.index
             vm.teams[vm.index2].players.push(item);
             vm.index2 = vm.index2 + 1;
             vm.selectedTeam = vm.teams[vm.index2];
+
+
           }
         };
 
@@ -126,6 +126,7 @@ app.controller('appController', ['myService', '$scope','$http',
             team.players.splice(index, 1);
           // adds player to top of master players list:
             vm.players.unshift(item);
+
         };
 
     }
