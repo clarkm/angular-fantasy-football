@@ -109,20 +109,37 @@
                 <hr />
 
 
-
                 <style>/*.playerrow {display:flex;justify-content: space-around;}.playerrow > * {}*/
-                  .playertable {width: 35%;}.playertable td, .playertable th {width: 16.6666667%}
+                  .playertable {width: 35%;}.playertable td, .playertable th {width: 16.6666667%;text-align: center;}
                   </style>
-                <input type="text" ng-model="searchString" placeholder="Search Name..." />
+
+                <input type="text" placeholder="Search players" ng-model="vm.searchPlayers">
 
                 <table class="playertable">
                   <thead>
                     <tr>
-                      <th>Rank</th><th>Name</th><th>Position</th><th>Team</th><th>Bye</th><th>Add player</th>
+                      <th>
+                        <a href="#" ng-click="sortType = 'rank*1'; sortReverse = !sortReverse">Rank</a>
+                      </th>
+                      <th>
+                        <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">Name</a>
+                      </th>
+                      <th>
+                        <a href="#" ng-click="sortType = 'pos'; sortReverse = !sortReverse">Position</a>
+                      </th>
+                      <th>
+                        <a href="#" ng-click="sortType = 'team'; sortReverse = !sortReverse">Team</a>
+                      </th>
+                      <th>
+                        <a href="#" ng-click="sortType = 'bye*1'; sortReverse = !sortReverse">Bye</a>
+                      </th>
+                      <th>
+                        Add player
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="playerrow" ng-repeat="player in vm.players | searchFor:searchString track by $index">
+                    <tr class="playerrow" ng-repeat="player in vm.players | orderBy:sortType:sortReverse | filter:vm.searchPlayers track by $index">
                       <td>{{player.rank}}</td> <td>{{player.name}}</td> <td>{{player.pos}}</td> <td>{{player.team}}</td> <td>{{player.bye}}</td>
                       <td><button ng-click="vm.addPlayer($index, player)">Add Player</button></td>
                     </tr>

@@ -21,6 +21,10 @@ app.controller('appController', ['myService', '$scope','$http',
     function (myService, $scope, $http){
         var vm = this;
 
+        vm.sortType = 'name';
+        vm.sortReverse = false;
+        vm.searchPlayers = '';
+        vm.addActive = false;
 
         vm.selectedTeam = null;
         vm.players = [];
@@ -46,6 +50,8 @@ app.controller('appController', ['myService', '$scope','$http',
 
         vm.teams = [];
         vm.addTeam = function (teamString) {
+            vm.addActive = true;
+            console.log('addActive ' + vm.addActive);
             console.log('selected team: ' + vm.selectedTeam);
             vm.teams.push({
               selected: false,
@@ -77,6 +83,7 @@ app.controller('appController', ['myService', '$scope','$http',
         vm.trash = [];
 
         vm.addPlayer = function(index, item){
+          if (vm.addActive) {
             vm.players.splice(index, 1);
 
             if (vm.selectedTeam !== null){
@@ -105,7 +112,7 @@ app.controller('appController', ['myService', '$scope','$http',
             vm.teams[vm.index2].players.push(item);
             vm.index2 = vm.index2 + 1;
             vm.selectedTeam = vm.teams[vm.index2];
-
+          }
         };
 
 
