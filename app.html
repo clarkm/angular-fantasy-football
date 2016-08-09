@@ -98,7 +98,7 @@
                           <h2>Name: {{item.name}}</h2>
                           <p ng-repeat="player in item.players track by $index">
                               {{player.rank}} | {{player.name}} | {{player.pos}} | {{player.team}} | {{player.bye}}
-                               <button ng-click="vm.removePlayer(player, item, index)">remove</button>
+                               <button ng-click="vm.removePlayer(player, item, $index)">remove</button>
                           </p>
                           <p>selected: {{item.selected}}</p>
                           <p>team number: <b style="font-size:36px">{{ $index + 1 }}</b></p>

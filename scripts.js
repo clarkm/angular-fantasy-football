@@ -110,11 +110,10 @@ app.controller('appController', ['myService', '$scope','$http',
 
 
         vm.removePlayer = function(item, team, index){
-            // coming through in the wrong format or something....
-            console.log('clark');
-            vm.players.unshift(item);
-            console.log(index);
+          // removes player from team:
             team.players.splice(index, 1);
+          // adds player to top of master players list:
+            vm.players.unshift(item);
         };
 
     }
