@@ -33,9 +33,7 @@ app.controller('appController', ['myService', '$scope','$http','$filter',
         myService.players().then(function(data){
             vm.players = data;
         });
-        console.log('players:' + vm.players);
 
-        //console.log(vm.players);
 
         vm.addItem = function(item){
             vm.players.push(item);
@@ -68,7 +66,6 @@ app.controller('appController', ['myService', '$scope','$http','$filter',
             vm.index2 = vm.teams.indexOf(team) ;
             if (vm.selectedTeam === vm.index2){
 
-                console.log(team);
                 return;
             }
 

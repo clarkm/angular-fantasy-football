@@ -1,53 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="app">
   <head>
-    <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.min.css"/>
-    <link rel="stylesheet" href="md-data-table-style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <style>
-      html, body {
-        font-family: 'Roboto', sans-serif;
-        font-size:14px;
-        height:100%;
-        margin: 0px;
-        padding: 0px;
-      }
 
-      /** Enabled Step 3... */
-
-      md-toolbar h3 {
-        margin: auto;
-        font-weight: 500;
-      }
-
-      md-list-item > button {
-        width:100%;
-        text-align:left !important;
-      }
-
-      #content  {
-        padding-left: 40px;
-        padding-right: 40px;
-        padding-top: 5px;
-      }
-
-      .avatar {
-        position: relative;
-        width: 128px;
-        height: 128px;
-        border: 1px solid #ddd;
-        border-radius: 50%;
-        display: inline-block;
-        overflow: hidden;
-        margin: 0px;
-        vertical-align: middle;
-        zoom:0.70;
-        transform: translateZ(0);
-        -webkit-transform: scale(0.70);
-        -moz-transform:scale(0.70);
-      }
-    </style>
     <div ng-controller="appController as vm">
 
 
@@ -76,7 +35,7 @@
                 </md-list>
               </md-sidenav>
 
-              <md-content flex id="content">
+            <md-content flex id="content">
                 <!-- User details sample -->
 
                 <h1 style="text-align:center;">On the Clock: {{vm.index2}} {{vm.selectedTeam.name}}</h1>
@@ -86,9 +45,6 @@
                 <button ng-click="vm.addTeam(vm.teamString)">add team</button>
                 <!--{{teams}}-->
           <!-- loop through and print the names of the teams that are selected 2 for loops! -->
-
-                <style>.selected{border: 5px solid red !important;}
-                .notselected {border-color:black !important;}</style>
 
                 <div style="display:flex;align-content:space-aroud;">
                       <div ng-repeat="item in vm.teams" style="border:1px solid;flex-grow:1;"
@@ -108,10 +64,6 @@
 
                 <hr />
 
-
-                <style>/*.playerrow {display:flex;justify-content: space-around;}.playerrow > * {}*/
-                  .playertable {width: 35%;}.playertable td, .playertable th {width: 16.6666667%;text-align: center;}
-                  </style>
 
                 <input type="text" placeholder="Search players" ng-model="vm.searchTerm">
 
@@ -162,13 +114,15 @@
 
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-animate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-aria.min.js"></script>
-    <script src="https://rawgit.com/angular/bower-material/master/angular-material.min.js"></script>
+     <!-- Angular Material requires Angular.js Libraries -->
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
 
-    <script src="md-data-table.js"></script>
-    <script src="md-data-table-templates.js"></script>
+     <!-- Angular Material Library -->
+     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+
 
     <script src="scripts.js"></script>
 
