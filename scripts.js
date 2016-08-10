@@ -66,7 +66,6 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
             vm.index2 = vm.teams.indexOf(team);
 
             vm.selectedTeam = team;
-            vm.selectedTeam.selected = !vm.selectedTeam.selected;
 
             if (vm.index2 % vm.teams.length === 0) {
               vm.index2 = 0;

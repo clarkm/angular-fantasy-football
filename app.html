@@ -16,12 +16,10 @@
             <h1>Angular Material</h1>
           </md-toolbar>
 
-
             <!-- Container #2 -->
             <div class="container" layout="row" flex>
               <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
                 <md-list>
-
                   <!-- List item #1 -->
                   <md-list-item >
 
@@ -54,7 +52,7 @@
                               {{player.rank}} | {{player.name}} | {{player.pos}} | {{player.team}} | {{player.bye}}
                                <button ng-click="vm.removePlayer(player, item, $index)">remove</button>
                           </p>
-                          <p>selected: {{item.selected}}</p>
+                          
                           <p>team number: <b style="font-size:36px">{{ $index + 1 }}</b></p>
 
                       </div>
