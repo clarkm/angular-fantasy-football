@@ -47,14 +47,12 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
         vm.addTeam = function (teamString) {
           if (vm.teams.length >= 12) {
             vm.disableTeamCreator = true;
-            //maybe display a md-toast popup here alerting that the teams are full
           }
           if (!vm.disableTeamCreator) {
               vm.addActive = true;
               console.log('addActive ' + vm.addActive);
               console.log('selected team: ' + vm.selectedTeam);
               vm.teams.push({
-                selected: false,
                 name: teamString,
                 players: []
               });
@@ -65,15 +63,10 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
         };
 
         vm.updateSelectedTeam = function (team){
-            vm.index2 = vm.teams.indexOf(team) ;
-            if (vm.selectedTeam === vm.index2){
-
-                return;
-            }
+            vm.index2 = vm.teams.indexOf(team);
 
             vm.selectedTeam = team;
             vm.selectedTeam.selected = !vm.selectedTeam.selected;
-
 
             if (vm.index2 % vm.teams.length === 0) {
               vm.index2 = 0;
@@ -142,7 +135,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
               }
 
             vm.teams[vm.index2].players.push(item);
-            vm.index2 = vm.index2 + 1;
+            vm.index2 += 1;
             vm.selectedTeam = vm.teams[vm.index2];
           }
           else {
