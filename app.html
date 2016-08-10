@@ -36,10 +36,8 @@
               </md-sidenav>
 
             <md-content flex id="content">
-                <!-- User details sample -->
 
-                <h1 style="text-align:center;">On the Clock: {{vm.index2}} {{vm.selectedTeam.name}}</h1>
-
+                <h1 style="text-align:center;">On the Clock: {{vm.teams[vm.index2].name}}</h1>
                 Team creator:
                 <input type="text" ng-model="vm.teamString" placeholder="Enter team name" />
                 <button ng-click="vm.addTeam(vm.teamString)">add team</button>
@@ -117,8 +115,10 @@
      <!-- Angular Material requires Angular.js Libraries -->
      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.js"></script>
 
      <!-- Angular Material Library -->
      <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
