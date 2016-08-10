@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngMaterial']);
+var app = angular.module("app", ['ngMaterial', 'ngMessages']);
 app.factory('myService', function($http) {
   var myService = {
     players: function() {
@@ -16,9 +16,9 @@ app.factory('myService', function($http) {
 });
 
 
-app.controller('appController', ['myService', '$scope','$http','$filter',
+app.controller('appController', ['myService','$scope','$http','$filter','$mdToast',
 
-    function (myService, $scope, $http, $filter){
+    function (myService, $scope, $http, $filter, $mdToast){
         var vm = this;
 
         vm.sortType = 'name';
@@ -59,6 +59,8 @@ app.controller('appController', ['myService', '$scope','$http','$filter',
                 players: []
               });
               vm.selectedTeam = vm.teams[vm.index2];
+            } else {
+              vm.showSimpleToast("You've reach the maximum number of teams - 12");
             }
         };
 
@@ -80,7 +82,43 @@ app.controller('appController', ['myService', '$scope','$http','$filter',
         };
 
 
-        vm.trash = [];
+            //toast alert messages:
+            var last = {
+              bottom: false,
+              top: true,
+              left: false,
+              right: true
+            };
+
+            vm.toastPosition = angular.extend({},last);
+            vm.getToastPosition = function() {
+              sanitizePosition();
+
+              return Object.keys(vm.toastPosition)
+                .filter(function(pos) { return vm.toastPosition[pos]; })
+                .join(' ');
+            };
+            function sanitizePosition() {
+              var current = vm.toastPosition;
+
+              if ( current.bottom && last.top ) current.top = false;
+              if ( current.top && last.bottom ) current.bottom = false;
+              if ( current.right && last.left ) current.left = false;
+              if ( current.left && last.right ) current.right = false;
+
+              last = angular.extend({},current);
+            }
+
+            vm.showSimpleToast = function(alertMessage) {
+              var pinTo = vm.getToastPosition();
+
+              $mdToast.show(
+                $mdToast.simple()
+                  .textContent(alertMessage)
+                  .position(pinTo )
+                  .hideDelay(3000)
+              );
+            };
 
         vm.addPlayer = function(index, item){
           if (vm.addActive) {
@@ -103,17 +141,13 @@ app.controller('appController', ['myService', '$scope','$http','$filter',
                   return;
               }
 
-              // if (vm.index2 === 0) {
-              //   console('never hits this');
-              //   vm.teams[0].addClass('selected');
-              // }
-
-            // onclick, vm.index = index2.index
             vm.teams[vm.index2].players.push(item);
             vm.index2 = vm.index2 + 1;
             vm.selectedTeam = vm.teams[vm.index2];
-
-
+          }
+          else {
+            // show error in md toast!
+            vm.showSimpleToast('Please create a team first!');
           }
         };
 
