@@ -34,14 +34,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
             vm.players = data;
         });
 
-
-        vm.addItem = function(item){
-            vm.players.push(item);
-            vm.newItem = null;
-        };
-
-
-            vm.index2 = 0;
+        vm.index2 = 0;
 
         vm.teams = [];
         vm.addTeam = function (teamString) {
@@ -50,15 +43,15 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
           }
           if (!vm.disableTeamCreator) {
               vm.addActive = true;
-              console.log('addActive ' + vm.addActive);
-              console.log('selected team: ' + vm.selectedTeam);
+
               vm.teams.push({
                 name: teamString,
                 players: []
               });
               vm.selectedTeam = vm.teams[vm.index2];
+              vm.teamString = '';
             } else {
-              vm.showSimpleToast("You've reach the maximum number of teams - 12");
+              vm.showSimpleToast("You've reach the maximum number of teams: 12");
             }
         };
 
@@ -72,7 +65,6 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
             }
 
         };
-
 
             //toast alert messages:
             var last = {
@@ -112,17 +104,11 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
               );
             };
 
-        vm.addPlayer = function(index, item){
+        vm.addPlayer = function(item){
           if (vm.addActive) {
               var index = vm.players.indexOf(item);
               vm.players.splice(index, 1);
               if (vm.selectedTeam !== null){
-
-                  // checks to see if it's the last team.....
-                  if (vm.index2 > vm.teams.length - 1) {
-                      console.log('going back to 0');
-                      vm.selectedTeam = vm.teams[vm.index2];
-                  }
 
                   vm.selectedTeam.players.push(item);
                   vm.index2 += 1;
@@ -155,24 +141,3 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
     }
 
 ]);
-
-app.filter('searchFor', function(){
-
-  return function(arr, searchString){
-      if(!searchString){
-          return arr;
-      }
-      var result = [];
-      searchString = searchString.toLowerCase();
-      angular.forEach(arr, function(item){
-          if(
-              angular.isDefined(item.name) &&
-              item.name.toLowerCase().indexOf(searchString) !== -1
-          ){
-              result.push(item);
-          }
-      });
-      return result;
-  };
-
-});

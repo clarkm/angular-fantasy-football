@@ -10,8 +10,9 @@
   /** Enabled Step 3... */
 
   md-toolbar h3 {
-    margin: auto;
+    text-align: left;;
     font-weight: 500;
+    text-indent: 10px;
   }
 
   md-list-item > button {
@@ -41,7 +42,7 @@
     -moz-transform:scale(0.70);
   }
 
-  .selected{border: 5px solid red !important;}
+  .selected{border-width: 3px !important;}
   .notselected {border-color:black !important;}
 
   .playertable {width: 35%;}
