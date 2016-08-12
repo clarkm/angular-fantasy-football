@@ -16,9 +16,9 @@ app.factory('myService', function($http) {
 });
 
 
-app.controller('appController', ['myService','$scope','$http','$filter','$mdToast',
+app.controller('appController', ['myService','$scope','$http','$filter','$mdToast','$mdDialog',
 
-    function (myService, $scope, $http, $filter, $mdToast){
+    function (myService, $scope, $http, $filter, $mdToast, $mdDialog){
         var vm = this;
 
         vm.sortType = 'name';
@@ -103,6 +103,22 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
                   .hideDelay(3000)
               );
             };
+
+        vm.showAlert = function(ev) {
+          // Appending dialog to document.body to cover sidenav in docs app
+          // Modal dialogs should fully cover application
+          // to prevent interaction outside of dialog
+          $mdDialog.show(
+            $mdDialog.alert()
+              .parent(angular.element(document.querySelector('body')))
+              .clickOutsideToClose(true)
+              .title('This is an alert title')
+              .textContent('You can specify some description text in here.')
+              .ariaLabel('Alert Dialog Demo')
+              .ok('Got it!')
+              .targetEvent(ev)
+          );
+        };
 
         vm.addPlayer = function(item){
           if (vm.addActive) {
