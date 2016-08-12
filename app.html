@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <div ng-controller="appController as vm">
+
+      <div layout="column">
+
+            <md-toolbar layout="row" style="background-color:rgb(0,82,135);">
+              <div class="md-toolbar-tools">
+                <h3>Arinc Direct</h3>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="More" ng-click="vm.showAlert($event)">
+                  <md-icon aria-hidden="false" style="color:white;" md-svg-src="gears.svg"></md-icon>
+                </md-button>
+              </div>
+            </md-toolbar>
+
+
+            <div class="container" layout="row" layout-wrap>
+
+
+              <h3 flex="100">On the Clock: {{vm.teams[vm.index2].name}}</h3>
+
+              <md-content layout="row" flex="100">
+
+                  <md-card flex="50">
+                    <md-toolbar layout="row" style="background-color:rgb(0,82,135);">
+                      <h3>Teams</h3>
+                    </md-toolbar>
+
+                    <md-input-container class="md-block">
+                      <label>Team Name</label>
+                      <input ng-model="vm.teamString">
+                      <md-button ng-click="vm.addTeam(vm.teamString)">add team</md-button>
+                    </md-input-container>
+
+
+                  <div layout="row" layout-wrap>
+                        <md-card ng-repeat="item in vm.teams" style="border:1px solid;margin:0;max-height:20vh;overflow:scroll;" flex="33"
+                        ng-click="vm.updateSelectedTeam(item);"
+                        ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected'">
+                            <h3>Name: <u>{{item.name}}</u> ({{ $index + 1 }})</h3>
+                            <p ng-repeat="player in item.players track by $index" style="margin:0;padding:0;">
+                                <span flex="5">{{player.rank}}</span>
+                                <span flex="40">{{player.name}}</span>
+                                <span flex="10">{{player.pos}}</span>
+                                <span flex="15">{{player.team}}</span>
+                                <span flex="5">{{player.bye}}</span>
+                                <span flex="25"><md-button ng-click="vm.removePlayer(player, item, $index)" style="margin:0;">remove</md-button></span>
+                                <md-divider flex="100" ng-if="!$last"></md-divider>
+                            </p>
+                        </md-card>
+
+                   </div>
+                  </md-card>
+
+
+                  <md-card flex="50">
+                    <md-toolbar layout="row" style="background-color:rgb(0,82,135);">
+                      <h3>Players</h3>
+                    </md-toolbar>
+
+
+                  <md-input-container class="md-block">
+                    <label>Search anything...</label>
+                    <input ng-model="vm.searchTerm">
+                  </md-input-container>
+
+                  <md-toolbar layout="row" class="md-hue-3" style="background-color: rgb(250,250,250);border-bottom: 1px solid #eee;">
+                    <div class="md-toolbar-tools">
+                      <div flex="10"><a href="#" ng-click="sortType = 'rank*1'; sortReverse = !sortReverse">Rank</a></div>
+                      <div flex="35"><a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">Name</a></div>
+                      <div flex="10"><a href="#" ng-click="sortType = 'pos'; sortReverse = !sortReverse">Position</a></div>
+                      <div flex="15"><a href="#" ng-click="sortType = 'team'; sortReverse = !sortReverse">Team</a></div>
+                      <div flex="10"><a href="#" ng-click="sortType = 'bye*1'; sortReverse = !sortReverse">Bye</a></div>
+                      <div flex="20">Add player</div>
+                    </div>
+                  </md-toolbar>
+                  <md-content style="height: 72vh;">
+                    <md-list>
+                      <md-list-item ng-repeat="player in vm.players | orderBy:sortType:sortReverse | filter:vm.searchTerm track by $index">
+                          <div flex="10">{{player.rank}}</div>
+                          <div flex="35">{{player.name}}</div>
+                          <div flex="10">{{player.pos}}</div>
+                          <div flex="15">{{player.team}}</div>
+                          <div flex="10">{{player.bye}}</div>
+                          <div flex="20"><md-button class="md-raised" ng-click="vm.addPlayer(player)">Add Player</md-button></div>
+                        <md-divider inset></md-divider>
+                      </md-list-item>
+                    </md-list>
+                  </md-content>
+
+                </md-card>
+
+              </md-content>
+            </div>
+
+        </div>
+
+    </div>
+
+     <!-- Angular Material requires Angular.js Libraries -->
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.js"></script>
+
+     <!-- Angular Material Library -->
+     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+
+
+    <script src="scripts.js"></script>
+
+  </body>
+</html>
