@@ -16,16 +16,15 @@ app.factory('myService', function($http) {
 });
 
 
-app.controller('appController', ['myService','$scope','$http','$filter','$mdToast','$mdDialog',
+app.controller('appController', ['myService','$scope','$http','$filter','$mdToast','$mdDialog','$mdMedia',
 
-    function (myService, $scope, $http, $filter, $mdToast, $mdDialog){
+    function (myService, $scope, $http, $filter, $mdToast, $mdDialog, $mdMedia){
         var vm = this;
 
-        vm.sortType = 'name';
-        vm.sortReverse = false;
         vm.searchTerm = '';
         vm.addActive = false;
         vm.disableTeamCreator = false;
+        vm.teamSelectNumber = 12;
 
         vm.selectedTeam = null;
         vm.players = [];
@@ -38,7 +37,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
 
         vm.teams = [];
         vm.addTeam = function (teamString) {
-          if (vm.teams.length >= 12) {
+          if (vm.teams.length >= vm.teamSelectNumber) {
             vm.disableTeamCreator = true;
           }
           if (!vm.disableTeamCreator) {
@@ -51,7 +50,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
               vm.selectedTeam = vm.teams[vm.index2];
               vm.teamString = '';
             } else {
-              vm.showSimpleToast("You've reach the maximum number of teams: 12");
+              vm.showSimpleToast("You've reach the maximum number of teams: " + vm.teamSelectNumber);
             }
         };
 
@@ -104,22 +103,6 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
               );
             };
 
-        vm.showAlert = function(ev) {
-          // Appending dialog to document.body to cover sidenav in docs app
-          // Modal dialogs should fully cover application
-          // to prevent interaction outside of dialog
-          $mdDialog.show(
-            $mdDialog.alert()
-              .parent(angular.element(document.querySelector('body')))
-              .clickOutsideToClose(true)
-              .title('This is an alert title')
-              .textContent('You can specify some description text in here.')
-              .ariaLabel('Alert Dialog Demo')
-              .ok('Got it!')
-              .targetEvent(ev)
-          );
-        };
-
         vm.addPlayer = function(item){
           if (vm.addActive) {
               var index = vm.players.indexOf(item);
@@ -153,6 +136,43 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
             vm.players.unshift(item);
 
         };
+
+    vm.showAlert = function(ev) {
+      // Appending dialog to document.body to cover sidenav in docs app
+      // Modal dialogs should fully cover application
+      // to prevent interaction outside of dialog
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title('This is an alert title')
+          .textContent('You can specify some description text in here.')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Got it!')
+          .targetEvent(ev)
+      );
+    };
+
+    vm.showAdvanced = function(ev) {
+
+        $mdDialog.show({
+          // controller: appController,
+          templateUrl: 'dialog1.tmpl.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true
+        })
+        .then(function(answer) {
+          vm.status = 'You said the information was "' + answer + '".';
+        }, function() {
+          vm.status = 'You cancelled the dialog.';
+        });
+
+      };
+
+    vm.updateTeamLimit = function () {
+      vm.teamsLimitNumber = vm.teamSelectNumber;
+    };
 
     }
 

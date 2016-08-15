@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body ng-cloak>
 
     <div ng-controller="appController as vm">
 
@@ -15,6 +15,7 @@
               <div class="md-toolbar-tools">
                 <h3>Arinc Direct</h3>
                 <span flex></span>
+                <a href="#" ng-click="vm.showAdvanced($event)">S</a>
                 <md-button class="md-icon-button" aria-label="More" ng-click="vm.showAlert($event)">
                   <md-icon aria-hidden="false" style="color:white;" md-svg-src="gears.svg"></md-icon>
                 </md-button>
@@ -24,9 +25,16 @@
 
             <div class="container" layout="row" layout-wrap>
 
-
               <h3 flex="100">On the Clock: {{vm.teams[vm.index2].name}}</h3>
-
+              <p>number of teams:
+                <select ng-change="vm.updateTeamLimit()" ng-model="vm.teamSelectNumber">
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                  <option value="12">12</option>
+                </select>
+                select number: {{vm.teamSelectNumber}}<br />
+                limitNumber: {{vm.teamsLimitNumber}}
+            </p>
               <md-content layout="row" flex="100">
 
                   <md-card flex="50">
@@ -74,11 +82,21 @@
 
                   <md-toolbar layout="row" class="md-hue-3" style="background-color: rgb(250,250,250);border-bottom: 1px solid #eee;">
                     <div class="md-toolbar-tools">
-                      <div flex="10"><a href="#" ng-click="sortType = 'rank*1'; sortReverse = !sortReverse">Rank</a></div>
-                      <div flex="35"><a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">Name</a></div>
-                      <div flex="10"><a href="#" ng-click="sortType = 'pos'; sortReverse = !sortReverse">Position</a></div>
-                      <div flex="15"><a href="#" ng-click="sortType = 'team'; sortReverse = !sortReverse">Team</a></div>
-                      <div flex="10"><a href="#" ng-click="sortType = 'bye*1'; sortReverse = !sortReverse">Bye</a></div>
+                      <div flex="10"><a href="#" ng-click="sortType = 'rank*1'; sortReverse = !sortReverse">Rank
+            <span ng-show="sortType == 'rank*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+            <span ng-show="sortType == 'rank*1' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
+                      <div flex="35"><a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">Name
+            <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+            <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></div>
+                      <div flex="10"><a href="#" ng-click="sortType = 'pos'; sortReverse = !sortReverse">Position
+            <span ng-show="sortType == 'pos' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+            <span ng-show="sortType == 'pos' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
+                      <div flex="15"><a href="#" ng-click="sortType = 'team'; sortReverse = !sortReverse">Team
+            <span ng-show="sortType == 'team' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+            <span ng-show="sortType == 'team' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
+                      <div flex="10"><a href="#" ng-click="sortType = 'bye*1'; sortReverse = !sortReverse">Bye
+            <span ng-show="sortType == 'bye*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+            <span ng-show="sortType == 'bye*1' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
                       <div flex="20">Add player</div>
                     </div>
                   </md-toolbar>
@@ -102,6 +120,41 @@
             </div>
 
         </div>
+
+        <script type="text/ng-template" id="dialog1.tmpl.html"><md-dialog aria-label="Mango"  ng-cloak>
+          <form>
+            <md-toolbar>
+              <div class="md-toolbar-tools">
+                <h2>Settings</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="$dialog.hide()">
+                  cancel
+                </md-button>
+              </div>
+            </md-toolbar>
+
+            <md-dialog-content>
+              <div class="md-dialog-content">
+                <p>number of teams:
+                  <select ng-change="vm.updateTeamLimit()" ng-model="vm.teamSelectNumber">
+                    <option value="8">8</option>
+                    <option value="10">10</option>
+                    <option value="12">12</option>
+                  </select>
+                  select number: {{vm.teamSelectNumber}}<br />
+                  limitNumber: {{vm.teamsLimitNumber}}
+              </p>
+              </div>
+            </md-dialog-content>
+
+            <md-dialog-actions layout="row">
+              <md-button href="#" md-autofocus>
+                More
+              </md-button>
+            </md-dialog-actions>
+          </form>
+        </md-dialog>
+        </script>
 
     </div>
 
