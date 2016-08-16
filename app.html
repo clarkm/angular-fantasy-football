@@ -50,20 +50,32 @@
 
 
                   <div layout="row" layout-wrap>
-                        <md-card ng-repeat="item in vm.teams" style="border:1px solid;margin:0;max-height:20vh;overflow:scroll;" flex="33"
-                        ng-click="vm.updateSelectedTeam(item);"
-                        ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected'">
-                            <h3>Name: <u>{{item.name}}</u> ({{ $index + 1 }})</h3>
-                            <p ng-repeat="player in item.players track by $index" style="margin:0;padding:0;">
-                                <span flex="5">{{player.rank}}</span>
-                                <span flex="40">{{player.name}}</span>
-                                <span flex="10">{{player.pos}}</span>
-                                <span flex="15">{{player.team}}</span>
-                                <span flex="5">{{player.bye}}</span>
-                                <span flex="25"><md-button ng-click="vm.removePlayer(player, item, $index)" style="margin:0;">remove</md-button></span>
-                                <md-divider flex="100" ng-if="!$last"></md-divider>
-                            </p>
-                        </md-card>
+
+                            <md-card flex="30" style="max-height:30vh;overflow:scroll;" ng-repeat="item in vm.teams" ng-click="vm.updateSelectedTeam(item);"
+                            ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected'">
+                              <md-card-header>
+                                <md-card-avatar>
+                                  {{ $index + 1 }}
+                                </md-card-avatar>
+                                <md-card-header-text>
+                                  <span class="md-title">{{item.name}}</span>
+                                  <span class="md-subhead" style="color:crimson;" ng-if="item.error">error message</span>
+                                </md-card-header-text>
+                              </md-card-header>
+
+                              <md-card-content>
+                                <p ng-repeat="player in item.players track by $index" style="margin:0;padding:0;">
+                                    <span flex="grow">{{player.rank}}</span>
+                                    <span flex="grow">{{player.name}}</span>
+                                    <span flex="grow">{{player.pos}}</span>
+                                    <span flex="grow">{{player.team}}</span>
+                                    <span flex="grow">{{player.bye}}</span>
+                                    <span flex="grow"><md-button ng-click="vm.removePlayer(player, item, $index)" style="margin:0;min-width:10px;">-</md-button></span>
+                                    <md-divider flex="100" ng-if="!$last"></md-divider>
+                                </p>
+                              </md-card-content>
+                            </md-card>
+
 
                    </div>
                   </md-card>
@@ -83,21 +95,21 @@
                   <md-toolbar layout="row" class="md-hue-3" style="background-color: rgb(250,250,250);border-bottom: 1px solid #eee;">
                     <div class="md-toolbar-tools">
                       <div flex="10"><a href="#" ng-click="sortType = 'rank*1'; sortReverse = !sortReverse">Rank
-            <span ng-show="sortType == 'rank*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-            <span ng-show="sortType == 'rank*1' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
+                        <span ng-show="sortType == 'rank*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                        <span ng-show="sortType == 'rank*1' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
                       <div flex="35"><a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">Name
-            <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-            <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></div>
-                      <div flex="10"><a href="#" ng-click="sortType = 'pos'; sortReverse = !sortReverse">Position
-            <span ng-show="sortType == 'pos' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-            <span ng-show="sortType == 'pos' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
+                        <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                        <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></div>
+                      <div flex="15"><a href="#" ng-click="sortType = 'pos'; sortReverse = !sortReverse">Position
+                        <span ng-show="sortType == 'pos' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                        <span ng-show="sortType == 'pos' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
                       <div flex="15"><a href="#" ng-click="sortType = 'team'; sortReverse = !sortReverse">Team
-            <span ng-show="sortType == 'team' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-            <span ng-show="sortType == 'team' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
+                        <span ng-show="sortType == 'team' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                        <span ng-show="sortType == 'team' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
                       <div flex="10"><a href="#" ng-click="sortType = 'bye*1'; sortReverse = !sortReverse">Bye
-            <span ng-show="sortType == 'bye*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-            <span ng-show="sortType == 'bye*1' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
-                      <div flex="20">Add player</div>
+                        <span ng-show="sortType == 'bye*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                        <span ng-show="sortType == 'bye*1' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
+                      <div flex="15">Add</div>
                     </div>
                   </md-toolbar>
                   <md-content style="height: 72vh;">
@@ -105,10 +117,10 @@
                       <md-list-item ng-repeat="player in vm.players | orderBy:sortType:sortReverse | filter:vm.searchTerm track by $index">
                           <div flex="10">{{player.rank}}</div>
                           <div flex="35">{{player.name}}</div>
-                          <div flex="10">{{player.pos}}</div>
+                          <div flex="15">{{player.pos}}</div>
                           <div flex="15">{{player.team}}</div>
                           <div flex="10">{{player.bye}}</div>
-                          <div flex="20"><md-button class="md-raised" ng-click="vm.addPlayer(player)">Add Player</md-button></div>
+                          <div flex="15"><md-button class="md-raised" ng-click="vm.addPlayer(player)">Add</md-button></div>
                         <md-divider inset></md-divider>
                       </md-list-item>
                     </md-list>
@@ -142,7 +154,8 @@
                     <option value="12">12</option>
                   </select>
                   select number: {{vm.teamSelectNumber}}<br />
-                  limitNumber: {{vm.teamsLimitNumber}}
+                  limitNumber: {{vm.teamsLimitNumber}}<br />
+                    -- maybe add a colors and 'layout' (side-by-side or stacked) option to this!
               </p>
               </div>
             </md-dialog-content>

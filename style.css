@@ -42,8 +42,11 @@
     -moz-transform:scale(0.70);
   }
 
-  .selected{border-width: 3px !important;}
-  .notselected {border-color:black !important;}
+  .selected{
+    -webkit-box-shadow: 0 4px 12px 0 rgba(0,82,135,.2),0 4px 4px 0 rgba(0,82,135,.14),0 8px 4px -4px rgba(0,82,135,.12);
+    box-shadow: 0 4px 12px 0 rgba(0,82,135,.2),0 4px 4px 0 rgba(0,82,135,.14),0 8px 4px -4px rgba(0,82,135,.12);
+  }
+
 
   .playertable {width: 35%;}
   .playertable td, .playertable th {width: 16.6666667%;text-align: center;}
