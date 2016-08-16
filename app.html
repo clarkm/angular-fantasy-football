@@ -33,12 +33,13 @@
                       <h3>Teams ({{vm.teams.length}} of {{vm.teamSelectNumber}})</h3>
                     </md-toolbar>
 
-                    <md-input-container class="md-block">
-                      <label>Team Name</label>
-                      <input ng-model="vm.teamString">
-                      <md-button ng-click="vm.addTeam(vm.teamString)">add team</md-button>
-                    </md-input-container>
-
+                    <form ng-submit="vm.addTeam(vm.teamString)">
+                      <md-input-container class="md-block">
+                        <label>Team Name</label>
+                        <input ng-model="vm.teamString">
+                        <md-button type="submit">add team</md-button>
+                      </md-input-container>
+                    </form>
 
                   <div layout="row" layout-wrap>
 
