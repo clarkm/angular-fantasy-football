@@ -137,22 +137,9 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
 
         };
 
-    vm.showAlert = function(ev) {
-      // Appending dialog to document.body to cover sidenav in docs app
-      // Modal dialogs should fully cover application
-      // to prevent interaction outside of dialog
-      $mdDialog.show(
-        $mdDialog.alert()
-          .parent(angular.element(document.querySelector('body')))
-          .clickOutsideToClose(true)
-          .title('This is an alert title')
-          .textContent('You can specify some description text in here.')
-          .ariaLabel('Alert Dialog Demo')
-          .ok('Got it!')
-          .targetEvent(ev)
-      );
+    vm.hideDialog = function() {
+      $mdDialog.hide();
     };
-
     vm.showAdvanced = function(ev) {
 
         $mdDialog.show({
@@ -160,19 +147,11 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
           templateUrl: 'dialog1.tmpl.html',
           parent: angular.element(document.body),
           targetEvent: ev,
+          scope: $scope.$new(),
           clickOutsideToClose:true
-        })
-        .then(function(answer) {
-          vm.status = 'You said the information was "' + answer + '".';
-        }, function() {
-          vm.status = 'You cancelled the dialog.';
         });
 
       };
-
-    vm.updateTeamLimit = function () {
-      vm.teamsLimitNumber = vm.teamSelectNumber;
-    };
 
     }
 

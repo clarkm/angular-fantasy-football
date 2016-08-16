@@ -15,8 +15,7 @@
               <div class="md-toolbar-tools">
                 <h3>Arinc Direct</h3>
                 <span flex></span>
-                <a href="#" ng-click="vm.showAdvanced($event)">S</a>
-                <md-button class="md-icon-button" aria-label="More" ng-click="vm.showAlert($event)">
+                <md-button class="md-icon-button" aria-label="More" ng-click="vm.showAdvanced($event)">
                   <md-icon aria-hidden="false" style="color:white;" md-svg-src="gears.svg"></md-icon>
                 </md-button>
               </div>
@@ -26,20 +25,12 @@
             <div class="container" layout="row" layout-wrap>
 
               <h3 flex="100">On the Clock: {{vm.teams[vm.index2].name}}</h3>
-              <p>number of teams:
-                <select ng-change="vm.updateTeamLimit()" ng-model="vm.teamSelectNumber">
-                  <option value="8">8</option>
-                  <option value="10">10</option>
-                  <option value="12">12</option>
-                </select>
-                select number: {{vm.teamSelectNumber}}<br />
-                limitNumber: {{vm.teamsLimitNumber}}
-            </p>
+
               <md-content layout="row" flex="100">
 
                   <md-card flex="50">
                     <md-toolbar layout="row" style="background-color:rgb(0,82,135);">
-                      <h3>Teams</h3>
+                      <h3>Teams ({{vm.teams.length}} of {{vm.teamSelectNumber}})</h3>
                     </md-toolbar>
 
                     <md-input-container class="md-block">
@@ -70,7 +61,7 @@
                                     <span flex="grow">{{player.pos}}</span>
                                     <span flex="grow">{{player.team}}</span>
                                     <span flex="grow">{{player.bye}}</span>
-                                    <span flex="grow"><md-button ng-click="vm.removePlayer(player, item, $index)" style="margin:0;min-width:10px;">-</md-button></span>
+                                    <span flex="grow"><md-button ng-click="vm.removePlayer(player, item, $index)" style="margin:0;min-width:10px;color:crimson">X</md-button></span>
                                     <md-divider flex="100" ng-if="!$last"></md-divider>
                                 </p>
                               </md-card-content>
@@ -133,38 +124,29 @@
 
         </div>
 
-        <script type="text/ng-template" id="dialog1.tmpl.html"><md-dialog aria-label="Mango"  ng-cloak>
+        <script type="text/ng-template" id="dialog1.tmpl.html"><md-dialog aria-label="Settings Dialog" ng-cloak>
           <form>
-            <md-toolbar>
+            <md-toolbar style="background-color:rgb(0,82,135);">
               <div class="md-toolbar-tools">
                 <h2>Settings</h2>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="$dialog.hide()">
-                  cancel
+                <md-button class="md-icon-button" ng-click="vm.hideDialog()">
+                  X
                 </md-button>
               </div>
             </md-toolbar>
 
             <md-dialog-content>
               <div class="md-dialog-content">
-                <p>number of teams:
-                  <select ng-change="vm.updateTeamLimit()" ng-model="vm.teamSelectNumber">
+                <p>Maximum teams:
+                  <select ng-model="vm.teamSelectNumber">
                     <option value="8">8</option>
                     <option value="10">10</option>
                     <option value="12">12</option>
                   </select>
-                  select number: {{vm.teamSelectNumber}}<br />
-                  limitNumber: {{vm.teamsLimitNumber}}<br />
-                    -- maybe add a colors and 'layout' (side-by-side or stacked) option to this!
               </p>
               </div>
             </md-dialog-content>
-
-            <md-dialog-actions layout="row">
-              <md-button href="#" md-autofocus>
-                More
-              </md-button>
-            </md-dialog-actions>
           </form>
         </md-dialog>
         </script>
