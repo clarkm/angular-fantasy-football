@@ -13,7 +13,7 @@
 
             <md-toolbar layout="row" style="background-color:rgb(0,82,135);">
               <div class="md-toolbar-tools">
-                <h3>Arinc Direct</h3>
+                <h3>Live Hive</h3>
                 <span flex></span>
                 <md-button class="md-icon-button" aria-label="More" ng-click="vm.showAdvanced($event)">
                   <md-icon aria-hidden="false" style="color:white;" md-svg-src="gears.svg"></md-icon>
@@ -43,30 +43,30 @@
 
                   <div layout="row" layout-wrap>
 
-                            <md-card flex="30" style="max-height:30vh;overflow:scroll;" ng-repeat="item in vm.teams" ng-click="vm.updateSelectedTeam(item);"
-                            ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected'">
-                              <md-card-header>
-                                <md-card-avatar>
-                                  {{ $index + 1 }}
-                                </md-card-avatar>
-                                <md-card-header-text>
-                                  <span class="md-title">{{item.name}}</span>
-                                  <span class="md-subhead" style="color:crimson;" ng-if="item.error">error message</span>
-                                </md-card-header-text>
-                              </md-card-header>
+                      <md-card flex="30" style="max-height:30vh;overflow:scroll;" ng-repeat="item in vm.teams" ng-click="vm.updateSelectedTeam(item);"
+                      ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected'">
+                        <md-subheader style="padding:0;">
+                          <md-card-avatar style="width: inherit;height: inherit;">
+                            {{ $index + 1 }}
+                          </md-card-avatar>
+                          <md-card-header-text>
+                            <span class="md-title">{{item.name}}</span>
+                            <span class="md-subhead" style="color:crimson;" ng-if="item.error">error message</span>
+                          </md-card-header-text>
+                        </md-subheader>
 
-                              <md-card-content>
-                                <p ng-repeat="player in item.players track by $index" style="margin:0;padding:0;">
-                                    <span flex="grow">{{player.rank}}</span>
-                                    <span flex="grow">{{player.name}}</span>
-                                    <span flex="grow">{{player.pos}}</span>
-                                    <span flex="grow">{{player.team}}</span>
-                                    <span flex="grow">{{player.bye}}</span>
-                                    <span flex="grow"><md-button ng-click="vm.removePlayer(player, item, $index)" style="margin:0;min-width:10px;color:crimson">X</md-button></span>
-                                    <md-divider flex="100" ng-if="!$last"></md-divider>
-                                </p>
-                              </md-card-content>
-                            </md-card>
+                        <md-card-content style="padding:8px;">
+                          <p layout="row" layout-align="space-around center" ng-repeat="player in item.players | orderBy:sortTeamType:sortTeamReverse track by $index" style="margin:0;padding:0;" ng-class="{{player.pos}}">
+                              <span flex="5" style="background-color:white;color:black;padding:10px 0;">{{$index + 1}}:</span>
+                              <span flex="10" style="text-align:center;">{{player.rank}}</span>
+                              <span flex="35">{{player.name}}</span>
+                              <span flex="15">{{player.pos}}</span>
+                              <span flex="15">{{player.team}}</span>
+                              <span flex="10">{{player.bye}}</span>
+                              <span flex="10"><md-button ng-click="vm.removePlayer(player, item, $index)" style="margin:0;min-width:10px;color:crimson;text-shadow: 2px 2px 3px rgba(255,255,255,0.7);">X</md-button></span>
+                          </p>
+                        </md-card-content>
+                      </md-card>
 
 
                    </div>
@@ -74,40 +74,47 @@
 
 
                   <md-card flex="50">
-                    <md-toolbar layout="row" style="background-color:rgb(0,82,135);">
+                    <md-toolbar layout="row" layout-align="space-between center" style="background-color:rgb(0,82,135);">
                       <h3>Players</h3>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <p class="key">
+                        <span ng-class="WR">WR</span> <span ng-class="RB">RB</span> <span ng-class="TE">TE</span> <span ng-class="QB">QB</span><span ng-class="DST">DST</span>
+                      </p>
                     </md-toolbar>
 
 
                   <md-input-container class="md-block">
                     <label>Search anything...</label>
                     <input ng-model="vm.searchTerm">
+                    <a href="#" ng-click="vm.searchTerm = ''" style="color:crimson;">X</a>
                   </md-input-container>
 
                   <md-toolbar layout="row" class="md-hue-3" style="background-color: rgb(250,250,250);border-bottom: 1px solid #eee;">
                     <div class="md-toolbar-tools">
-                      <div flex="10"><a href="#" ng-click="sortType = 'rank*1'; sortReverse = !sortReverse">Rank
-                        <span ng-show="sortType == 'rank*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-                        <span ng-show="sortType == 'rank*1' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
-                      <div flex="35"><a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">Name
-                        <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-                        <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></div>
-                      <div flex="15"><a href="#" ng-click="sortType = 'pos'; sortReverse = !sortReverse">Position
-                        <span ng-show="sortType == 'pos' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-                        <span ng-show="sortType == 'pos' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
-                      <div flex="15"><a href="#" ng-click="sortType = 'team'; sortReverse = !sortReverse">Team
-                        <span ng-show="sortType == 'team' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-                        <span ng-show="sortType == 'team' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
-                      <div flex="10"><a href="#" ng-click="sortType = 'bye*1'; sortReverse = !sortReverse">Bye
-                        <span ng-show="sortType == 'bye*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-                        <span ng-show="sortType == 'bye*1' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></a></div>
+                      <div flex="10"><a href="#" ng-click="vm.sortType = 'rank*1'; sortReverse = !sortReverse">Rank
+                        <span ng-show="vm.sortType == 'rank*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                        <span ng-show="vm.sortType == 'rank*1' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></div>
+                      <div flex="35"><a href="#" ng-click="vm.sortType = 'name'; sortReverse = !sortReverse">Name
+                        <span ng-show="vm.sortType == 'name' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                        <span ng-show="vm.sortType == 'name' && sortReverse" class="fa fa-caret-up">&#9650;</span></div>
+                      <div flex="15"><a href="#" ng-click="vm.sortType = 'pos'; sortReverse = !sortReverse">Position
+                        <span ng-show="vm.sortType == 'pos' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                        <span ng-show="vm.sortType == 'pos' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></div>
+                      <div flex="15"><a href="#" ng-click="vm.sortType = 'team'; sortReverse = !sortReverse">Team
+                        <span ng-show="vm.sortType == 'team' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                        <span ng-show="vm.sortType == 'team' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></div>
+                      <div flex="10"><a href="#" ng-click="vm.sortType = 'bye*1'; sortReverse = !sortReverse">Bye
+                        <span ng-show="vm.sortType == 'bye*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                        <span ng-show="vm.sortType == 'bye*1' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></div>
                       <div flex="15">Add</div>
                     </div>
                   </md-toolbar>
                   <md-content style="height: 72vh;">
                     <md-list>
-                      <md-list-item ng-repeat="player in vm.players | orderBy:sortType:sortReverse | filter:vm.searchTerm track by $index">
-                          <div flex="10">{{player.rank}}</div>
+                      <md-list-item ng-repeat="player in vm.players | orderBy:vm.sortType:sortReverse | filter:vm.searchTerm track by $index" ng-class="{{player.pos}}">
+                          <div flex="10" style="text-align:center;">{{player.rank}}</div>
                           <div flex="35">{{player.name}}</div>
                           <div flex="15">{{player.pos}}</div>
                           <div flex="15">{{player.team}}</div>

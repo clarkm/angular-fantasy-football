@@ -50,3 +50,10 @@
 
   .playertable {width: 35%;}
   .playertable td, .playertable th {width: 16.6666667%;text-align: center;}
+  .fa-caret-down, .fa-caret-up {font-size: 11px;}
+  .key span {padding: 5px;}
+  [ng-class*=WR] {background-color: #69A957;color:white;}
+  [ng-class*=RB] {background-color: #041563;color:white;}
+  [ng-class*=QB] {background-color: #FCBF05;color:white;}
+  [ng-class*=TE] {background-color: #DB3E74;color:white;}
+  [ng-class*=DST] {background-color: #A71020;color:white;}

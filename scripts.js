@@ -32,6 +32,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
         myService.players().then(function(data){
             vm.players = data;
         });
+        vm.sortType = 'rank*1';
 
         vm.index2 = 0;
 
