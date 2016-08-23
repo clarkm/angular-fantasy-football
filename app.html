@@ -36,7 +36,7 @@
                     <form ng-submit="vm.addTeam(vm.teamString)">
                       <md-input-container class="md-block">
                         <label>Team Name</label>
-                        <input ng-model="vm.teamString">
+                        <input ng-model="vm.teamString" input-clear>
                         <md-button type="submit">add team</md-button>
                       </md-input-container>
                     </form>
@@ -87,8 +87,7 @@
 
                   <md-input-container class="md-block">
                     <label>Search anything...</label>
-                    <input ng-model="vm.searchTerm">
-                    <a href="#" ng-click="vm.searchTerm = ''" style="color:crimson;">X</a>
+                    <input ng-model="vm.searchTerm" input-clear>
                   </md-input-container>
 
                   <md-toolbar layout="row" class="md-hue-3" style="background-color: rgb(250,250,250);border-bottom: 1px solid #eee;">

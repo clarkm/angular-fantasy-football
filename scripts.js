@@ -15,6 +15,48 @@ app.factory('myService', function($http) {
   return myService;
 });
 
+app.directive('inputClear',
+
+  function () {
+    return {
+        restrict: 'A',
+        compile: function (element, attrs) {
+            var color = attrs.inputClear;
+            var style = color ? "color:" + color + ";" : "";
+            var action = attrs.ngModel + " = ''";
+            element.after(
+                '<md-button class="animate-show md-icon-button md-accent"' +
+                'ng-show="' + attrs.ngModel + '" ng-click="' + action + '"' +
+                'style="position: absolute; top: 0px; right: -6px; /*margin: 13px 0px;*/">' +
+                '<div style="' + style + '">x</div>' +
+                '</md-button>');
+        }
+    };
+  }
+
+);
+
+app.directive('inputClearNoMaterial',
+
+  function () {
+    return {
+        restrict: 'A',
+        compile: function (element, attrs) {
+            var color = attrs.inputClearNoMaterial;
+            var style = color ? "color:" + color + ";" : "";
+            var action = attrs.ngModel + " = ''";
+            element.after(
+                '<span class="animate-show"' +
+                'ng-show="' + attrs.ngModel + '" ng-click="' + action + '"' +
+                'style="position: absolute; margin: 3px -20px; cursor: pointer;">' +
+                '<div style="' + style + '">x</div>' +
+                '</span>');
+        }
+    };
+  }
+
+);
+
 
 app.controller('appController', ['myService','$scope','$http','$filter','$mdToast','$mdDialog','$mdMedia',
 
@@ -33,6 +75,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
             vm.players = data;
         });
         vm.sortType = 'rank*1';
+        vm.value = '';
 
         vm.index2 = 0;
 
