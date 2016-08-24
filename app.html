@@ -24,7 +24,9 @@
 
             <div class="container" layout="row" layout-wrap>
 
-              <h3 flex="100">On the Clock: {{vm.teams[vm.index2].name}}</h3>
+            <div layout="row" layout-align="center center" flex="100">
+              <h4>On the Clock: <span style="font-size:200%;">{{vm.teams[vm.index2].name}}</span></h4>
+            </div>
 
               <md-content layout="row" flex="100">
 
@@ -46,11 +48,14 @@
                       <md-card flex="30" style="max-height:30vh;overflow:scroll;" ng-repeat="item in vm.teams" ng-click="vm.updateSelectedTeam(item);"
                       ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected'">
                         <md-subheader style="padding:0;">
-                          <md-card-avatar style="width: inherit;height: inherit;">
-                            {{ $index + 1 }}
-                          </md-card-avatar>
-                          <md-card-header-text>
+                          <md-card-header-text layout="row" layout-align="space-between center">
+                            <span>{{ $index + 1 }}</span>
                             <span class="md-title">{{item.name}}</span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <small ng-if="item.players.length" style="font-size:10px;">Players: {{item.players.length}}</small>
                             <span class="md-subhead" style="color:crimson;" ng-if="item.error">error message</span>
                           </md-card-header-text>
                         </md-subheader>
@@ -80,7 +85,7 @@
                       <span></span>
                       <span></span>
                       <p class="key">
-                        <span ng-class="WR">WR</span> <span ng-class="RB">RB</span> <span ng-class="TE">TE</span> <span ng-class="QB">QB</span><span ng-class="DST">DST</span>
+                        <span ng-class="WR">WR</span> <span ng-class="RB">RB</span> <span ng-class="TE">TE</span> <span ng-class="QB">QB</span><span ng-class="DST">DST</span><span ng-class="K">K</span>
                       </p>
                     </md-toolbar>
 
@@ -152,6 +157,14 @@
                     <option value="12">12</option>
                   </select>
               </p>
+              <p>Maximum players on a team:
+                <select ng-model="vm.maxPlayersPerTeam">
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                </select>
+            </p>
               </div>
             </md-dialog-content>
           </form>

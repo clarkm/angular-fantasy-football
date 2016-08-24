@@ -70,6 +70,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
 
         vm.selectedTeam = null;
         vm.players = [];
+        vm.maxPlayersPerTeam = 16;
 
         myService.players().then(function(data){
             vm.players = data;
@@ -148,7 +149,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
             };
 
         vm.addPlayer = function(item){
-          if (vm.addActive) {
+          if (vm.addActive && vm.selectedTeam.players.length < vm.maxPlayersPerTeam) {
               var index = vm.players.indexOf(item);
               vm.players.splice(index, 1);
               if (vm.selectedTeam !== null){

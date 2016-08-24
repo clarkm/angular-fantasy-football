@@ -57,3 +57,4 @@
   [ng-class*=QB] {background-color: #FCBF05;color:white;}
   [ng-class*=TE] {background-color: #DB3E74;color:white;}
   [ng-class*=DST] {background-color: #A71020;color:white;}
+  [ng-class*=K] {background-color: white;color:rgba(0,0,0,0.87);}
