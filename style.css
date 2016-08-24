@@ -58,3 +58,5 @@
   [ng-class*=TE] {background-color: #DB3E74;color:white;}
   [ng-class*=DST] {background-color: #A71020;color:white;}
   [ng-class*=K] {background-color: white;color:rgba(0,0,0,0.87);}
+
+  .md-subheader ._md-subheader-inner {padding: 3px 15px;}
