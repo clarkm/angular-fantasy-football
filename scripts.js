@@ -1,3 +1,7 @@
+window.onbeforeunload = function() {
+  return "This will clear everything. Are you sure?";
+};
+
 var app = angular.module("app", ['ngMaterial', 'ngMessages']);
 app.factory('myService', function($http) {
   var myService = {
@@ -169,7 +173,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
               vm.selectedTeam = vm.teams[vm.index2];
             }
             else {
-              vm.showSimpleToast("You can't hold any more players!");              
+              vm.showSimpleToast("You can't hold any more players!");
             }
           }
           else {
