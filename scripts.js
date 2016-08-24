@@ -149,23 +149,28 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
             };
 
         vm.addPlayer = function(item){
-          if (vm.addActive && vm.selectedTeam.players.length < vm.maxPlayersPerTeam) {
-              var index = vm.players.indexOf(item);
-              vm.players.splice(index, 1);
-              if (vm.selectedTeam !== null){
+          if (vm.addActive) {
+            if (vm.selectedTeam.players.length < vm.maxPlayersPerTeam) {
+                var index = vm.players.indexOf(item);
+                vm.players.splice(index, 1);
+                if (vm.selectedTeam !== null){
 
-                  vm.selectedTeam.players.push(item);
-                  vm.index2 += 1;
-                  if (vm.index2 % vm.teams.length === 0) {
-                    vm.index2 = 0;
-                  }
-                  vm.selectedTeam = vm.teams[vm.index2];
-                  return;
-              }
+                    vm.selectedTeam.players.push(item);
+                    vm.index2 += 1;
+                    if (vm.index2 % vm.teams.length === 0) {
+                      vm.index2 = 0;
+                    }
+                    vm.selectedTeam = vm.teams[vm.index2];
+                    return;
+                }
 
-            vm.teams[vm.index2].players.push(item);
-            vm.index2 += 1;
-            vm.selectedTeam = vm.teams[vm.index2];
+              vm.teams[vm.index2].players.push(item);
+              vm.index2 += 1;
+              vm.selectedTeam = vm.teams[vm.index2];
+            }
+            else {
+              vm.showSimpleToast("You can't hold any more players!");              
+            }
           }
           else {
             // show error in md toast!
