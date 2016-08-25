@@ -83,6 +83,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
         vm.value = '';
 
         vm.index2 = 0;
+        vm.moveInReverse = false;
 
         vm.teams = [];
         vm.addTeam = function (teamString) {
@@ -157,16 +158,28 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
             if (vm.selectedTeam.players.length < vm.maxPlayersPerTeam) {
                 var index = vm.players.indexOf(item);
                 vm.players.splice(index, 1);
-                if (vm.selectedTeam !== null){
 
                     vm.selectedTeam.players.push(item);
-                    vm.index2 += 1;
-                    if (vm.index2 % vm.teams.length === 0) {
-                      vm.index2 = 0;
+
+                    if (vm.moveInReverse === false) {
+                      vm.index2 += 1;
+                        if (vm.index2 % vm.teams.length === 0) {
+                          vm.index2 -= 1;
+                          vm.moveInReverse = true;
+                        }
+
+                      vm.selectedTeam = vm.teams[vm.index2];
+                      return;
+                    } else if (vm.moveInReverse === true) {
+                      vm.index2 -= 1;
+                        if ((vm.index2 % vm.teams.length +1) === 0) {
+                          vm.index2 = 0;
+                          vm.moveInReverse = false;
+                        }
+                      vm.selectedTeam = vm.teams[vm.index2];
+                      return;
                     }
-                    vm.selectedTeam = vm.teams[vm.index2];
-                    return;
-                }
+
 
               vm.teams[vm.index2].players.push(item);
               vm.index2 += 1;
