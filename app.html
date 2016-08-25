@@ -55,7 +55,15 @@
                             <span></span>
                             <span></span>
                             <span></span>
-                            <small ng-if="item.players.length" style="font-size:10px;">Players: {{item.players.length}}</small>
+                            <span ng-if="item.players.length" layout="row" style="font-size: 80%;">
+                              <b>Total: {{item.players.length}}</b>
+                              <b>WR: {{ vm.countPos(item.players,'WR') }}</b>
+                              <b>RB: {{ vm.countPos(item.players,'RB') }}</b>
+                              <b>QB: {{ vm.countPos(item.players,'QB') }}</b>
+                              <b>TE: {{ vm.countPos(item.players,'TE') }}</b>
+                              <b>DST: {{ vm.countPos(item.players,'DST') }}</b>
+                              <b>K: {{ vm.countPos(item.players,'K') }}</b>
+                            </span>
                             <span class="md-subhead" style="color:crimson;" ng-if="item.error">error message</span>
                           </md-card-header-text>
                         </md-subheader>

@@ -191,6 +191,16 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
 
         };
 
+        vm.countPos = function (obj,searchTerm) {
+          count = 0;
+          for (i=0; i<obj.length; i++) {
+              if (obj[i].pos.includes(searchTerm) ) {
+                count += 1;
+              }
+          }
+          return count;
+        };
+
     vm.hideDialog = function() {
       $mdDialog.hide();
     };
