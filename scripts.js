@@ -106,13 +106,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
 
         vm.updateSelectedTeam = function (team){
             vm.index2 = vm.teams.indexOf(team);
-
             vm.selectedTeam = team;
-
-            if (vm.index2 % vm.teams.length === 0) {
-              vm.index2 = 0;
-            }
-
         };
 
             //toast alert messages:
