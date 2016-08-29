@@ -15,7 +15,7 @@
               <div class="md-toolbar-tools">
                 <h3>Live Hive</h3>
                 <span flex></span>
-                Settings: <md-button class="md-icon-button" aria-label="More" ng-click="vm.showAdvanced($event)">
+                Settings: <md-button class="md-icon-button" aria-label="Settings" ng-click="vm.showAdvanced($event)">
                   <md-icon aria-hidden="false" style="color:white;" md-svg-src="gears.svg"></md-icon>
                 </md-button>
               </div>
@@ -30,7 +30,7 @@
 
               <md-content layout="row" flex="100">
 
-                  <md-card flex="50">
+                  <md-card flex="60">
                     <md-toolbar layout="row" style="background-color:rgb(0,82,135);">
                       <h3>Teams ({{vm.teams.length}} of {{vm.teamSelectNumber}})</h3>
                     </md-toolbar>
@@ -50,7 +50,7 @@
                         <md-subheader style="padding:0;">
                           <md-card-header-text layout="row" layout-align="space-between center">
                             <span>{{ $index + 1 }}</span>
-                            <span class="md-title" style="height: 36px;"><md-input-container style="margin:0;"><input ng-model="item.name" /></md-input-container></span>
+                            <span class="md-title" style="height: 36px;"><md-input-container style="margin:0;"><input aria-label="Team Name" ng-model="item.name" /></md-input-container></span>
                             <span></span>
                             <span></span>
                             <span></span>
@@ -86,7 +86,7 @@
                   </md-card>
 
 
-                  <md-card flex="50">
+                  <md-card flex="40">
                     <md-toolbar layout="row" layout-align="space-between center" style="background-color:rgb(0,82,135);">
                       <h3>Players</h3>
                       <span></span>
