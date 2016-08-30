@@ -93,7 +93,13 @@
                       <span></span>
                       <span></span>
                       <p class="key">
-                        <span ng-class="WR">WR</span> <span ng-class="RB">RB</span> <span ng-class="TE">TE</span> <span ng-class="QB">QB</span><span ng-class="DST">DST</span><span ng-class="K">K</span>
+                        <a href="#" ng-click="vm.buttonSearchTerm = ''" ng-class="K">ALL</a>
+                        <a href="#" ng-click="vm.buttonSearchTerm = 'WR'" ng-class="WR">WR</a>
+                        <a href="#" ng-click="vm.buttonSearchTerm = 'RB'" ng-class="RB">RB</a>
+                        <a href="#" ng-click="vm.buttonSearchTerm = 'TE'" ng-class="TE">TE</a>
+                        <a href="#" ng-click="vm.buttonSearchTerm = 'QB'" ng-class="QB">QB</a>
+                        <a href="#" ng-click="vm.buttonSearchTerm = 'DST'" ng-class="DST">DST</a>
+                        <a href="#" ng-click="vm.buttonSearchTerm = 'K'" ng-class="K" style="margin-right: 5px;">K</a>
                       </p>
                     </md-toolbar>
 
@@ -125,7 +131,7 @@
                   </md-toolbar>
                   <md-content style="height: 72vh;">
                     <md-list>
-                      <md-list-item ng-repeat="player in vm.players | orderBy:vm.sortType:sortReverse | filter:vm.searchTerm track by $index" ng-class="{{player.pos}}">
+                      <md-list-item ng-repeat="player in vm.players | orderBy:vm.sortType:sortReverse | filter:vm.searchTerm | filter:{pos:vm.buttonSearchTerm} track by $index" ng-class="{{player.pos}}">
                           <div flex="10" style="text-align:center;">{{player.rank}}</div>
                           <div flex="35">{{player.name}}</div>
                           <div flex="15">{{player.pos}}</div>
