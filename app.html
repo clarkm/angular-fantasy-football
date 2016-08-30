@@ -45,9 +45,9 @@
 
                   <div layout="row" layout-wrap>
 
-                      <md-card flex="30" style="max-height:30vh;overflow:scroll;" ng-repeat="item in vm.teams" ng-click="vm.updateSelectedTeam(item);"
+                      <md-card flex="30" style="height:30vh;overflow:hidden;position:relative;" ng-repeat="item in vm.teams" ng-click="vm.updateSelectedTeam(item);"
                       ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected'">
-                        <md-subheader style="padding:0;">
+                        <md-subheader style="padding:0;position:absolute;top:0;width:100%;">
                           <md-card-header-text layout="row" layout-align="space-between center">
                             <span>{{ $index + 1 }}</span>
                             <span class="md-title" style="height: 36px;"><md-input-container style="margin:0;"><input aria-label="Team Name" ng-model="item.name" /></md-input-container></span>
@@ -56,19 +56,19 @@
                             <span></span>
                             <span></span>
                             <span ng-if="item.players.length" layout="row" style="font-size: 80%;">
-                              <b>Total: {{item.players.length}}</b>
-                              <b>WR: {{ vm.countPos(item.players,'WR') }}</b>
-                              <b>RB: {{ vm.countPos(item.players,'RB') }}</b>
-                              <b>QB: {{ vm.countPos(item.players,'QB') }}</b>
-                              <b>TE: {{ vm.countPos(item.players,'TE') }}</b>
-                              <b>DST: {{ vm.countPos(item.players,'DST') }}</b>
-                              <b>K: {{ vm.countPos(item.players,'K') }}</b>
+                              <b>Total: <br />{{item.players.length}}</b>
+                              <b>WR:  <br />{{ vm.countPos(item.players,'WR') }}</b>
+                              <b>RB:  <br />{{ vm.countPos(item.players,'RB') }}</b>
+                              <b>QB:  <br />{{ vm.countPos(item.players,'QB') }}</b>
+                              <b>TE:  <br />{{ vm.countPos(item.players,'TE') }}</b>
+                              <b>DST:  <br />{{ vm.countPos(item.players,'DST') }}</b>
+                              <b>K:  <br />{{ vm.countPos(item.players,'K') }}</b>
                             </span>
                             <span class="md-subhead" style="color:crimson;" ng-if="item.error">error message</span>
                           </md-card-header-text>
                         </md-subheader>
 
-                        <md-card-content style="padding:8px;">
+                        <md-card-content style="padding:8px;position: absolute;width: 100%;top: 34px;overflow: scroll;height: 100%;">
                           <p layout="row" layout-align="space-around center" ng-repeat="player in item.players | orderBy:sortTeamType:sortTeamReverse track by $index" style="margin:0;padding:0;" ng-class="{{player.pos}}">
                               <span flex="5" style="background-color:white;color:black;padding:10px 0;">{{$index + 1}}:</span>
                               <span flex="10" style="text-align:center;">{{player.rank}}</span>
