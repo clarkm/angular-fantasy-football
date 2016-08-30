@@ -68,7 +68,7 @@
                           </md-card-header-text>
                         </md-subheader>
 
-                        <md-card-content style="padding:8px;position: absolute;width: 100%;top: 34px;overflow: scroll;height: 100%;">
+                        <md-card-content style="padding:8px;position: absolute;width: 100%;top: 34px;overflow: scroll;height: 80%;">
                           <p layout="row" layout-align="space-around center" ng-repeat="player in item.players | orderBy:sortTeamType:sortTeamReverse track by $index" style="margin:0;padding:0;" ng-class="{{player.pos}}">
                               <span flex="5" style="background-color:white;color:black;padding:10px 0;">{{$index + 1}}:</span>
                               <span flex="10" style="text-align:center;">{{player.rank}}</span>
