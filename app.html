@@ -64,6 +64,7 @@
                               <b>DST:  <br />{{ vm.countPos(item.players,'DST') }}</b>
                               <b>K:  <br />{{ vm.countPos(item.players,'K') }}</b>
                             </span>
+                            <a href="#" ng-click="vm.removeTeam(item)">X</a>
                             <span class="md-subhead" style="color:crimson;" ng-if="item.error">error message</span>
                           </md-card-header-text>
                         </md-subheader>

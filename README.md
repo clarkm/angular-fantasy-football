@@ -8,7 +8,3 @@ Sort by team, position, rank, bye week, etc. Then add a player to up to 12 teams
 Setting for 8,10,12 team leagues, and 15,16,17,18 players.
 Much easier than manually crossing off players with pen & paper during a live draft!
 Source player rank data from fantasypros.com with many more sources to come!
-
-
-to do:
-[ ] make a ‘remove team’ function - have it add all the players back to the master list. need a confirm option for this!

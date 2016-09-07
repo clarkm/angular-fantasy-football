@@ -109,6 +109,21 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
             vm.selectedTeam = team;
         };
 
+        vm.removeTeam = function (team) {
+          var areYouSure = confirm("Are you sure you want to delete this team?");
+          if (areYouSure === true) {
+
+            for (i=0;i<= team.players.length;i++) {
+              vm.players.unshift(team.players[i]);
+            }
+
+            team.players = [];
+            var index = vm.teams.indexOf(team);
+            vm.teams.splice(index, 1);
+          }
+
+        };
+
             //toast alert messages:
             var last = {
               bottom: false,
