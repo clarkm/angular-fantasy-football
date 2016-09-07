@@ -124,6 +124,22 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
 
         };
 
+        vm.resetEverything = function () {
+            var areYouSure = confirm("Are you sure you want to delete EVERYTHING?");
+            if (areYouSure === true) {
+              var areYouReallySure = confirm('Are you really sure - everything will be GONE?');
+              if (areYouReallySure === true) {
+                for (var i = 0; i < vm.teams.length; i++) {
+                  for (var j = 0; j < vm.teams[i].players.length; j++) {
+                    vm.players.unshift(vm.teams[i].players[j]);
+                  }
+                }
+                  vm.teams = [];
+                  vm.addActive = true;vm.disableTeamCreator = false;
+                }
+              }
+            };
+
             //toast alert messages:
             var last = {
               bottom: false,
