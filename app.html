@@ -15,7 +15,7 @@
               <div class="md-toolbar-tools">
                 <h3>Live Hive</h3>
                 <span flex></span>
-                <a href="#" ng-click="vm.resetEverything()" style="margin-right:5px;">Reset All</a> | 
+                <a href="#" ng-click="vm.resetEverything()" style="margin-right:5px;">Reset All</a> |
                 Settings: <md-button class="md-icon-button" aria-label="Settings" ng-click="vm.showAdvanced($event)">
                   <md-icon aria-hidden="false" style="color:white;" md-svg-src="gears.svg"></md-icon>
                 </md-button>
@@ -23,15 +23,15 @@
             </md-toolbar>
 
 
-            <div class="container" layout="row" layout-wrap>
+            <div class="container" layout="column" layout-wrap>
 
-            <div layout="row" layout-align="center center" flex="100">
+            <div layout="row" layout-align="center center">
               <h4>On the Clock: <span style="font-size:200%;">{{vm.teams[vm.index2].name}}</span></h4>
             </div>
 
-              <md-content layout="row" flex="100">
+              <md-content layout="row" layout-sm="column" layout-xs="column">
 
-                  <md-card flex="60">
+                  <md-card flex="100" flex-gt-sm="60" flex-order-sm="2" flex-order-xs="2">
                     <md-toolbar layout="row" style="background-color:rgb(0,82,135);">
                       <h3>Teams ({{vm.teams.length}} of {{vm.teamSelectNumber}})</h3>
                     </md-toolbar>
@@ -46,7 +46,7 @@
 
                   <div layout="row" layout-wrap>
 
-                      <md-card flex="30" style="height:30vh;overflow:hidden;position:relative;" ng-repeat="item in vm.teams" ng-click="vm.updateSelectedTeam(item);"
+                      <md-card flex="30" flex-sm="45" flex-xs="100" style="height:30vh;overflow:hidden;position:relative;" ng-repeat="item in vm.teams" ng-click="vm.updateSelectedTeam(item);"
                       ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected'">
                         <md-subheader style="padding:0;position:absolute;top:0;width:100%;">
                           <md-card-header-text layout="row" layout-align="space-between center">
@@ -88,7 +88,7 @@
                   </md-card>
 
 
-                  <md-card flex="40">
+                  <md-card flex="100" flex-gt-sm="40" flex-order-sm="1" flex-order-xs="1">
                     <md-toolbar layout="row" layout-align="space-between center" style="background-color:rgb(0,82,135);">
                       <h3>Players</h3>
                       <span></span>
