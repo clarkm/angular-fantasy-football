@@ -19,6 +19,12 @@ app.factory('myService', function($http) {
   return myService;
 });
 
+//needed for downloading/sanitizing data:
+app.config(['$compileProvider',
+    function ($compileProvider) {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob|data):/);
+}]);
+
 app.directive('inputClear',
 
   function () {
@@ -220,6 +226,18 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
           }
         };
 
+        vm.downloadJson = function () {
+          var json = JSON.stringify(vm.teams);
+          return JSON.stringify(vm.teams);
+        };
+
+        vm.uploadJson = function () {
+          var file = document.getElementById('file').files[0].name;
+          $http.get(file)
+           .then(function(res){
+              vm.teams = res.data;
+            });
+        };
 
         vm.removePlayer = function(item, team, index){
           // removes player from team:

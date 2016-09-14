@@ -29,6 +29,14 @@
               <h4>On the Clock: <span style="font-size:200%;">{{vm.teams[vm.index2].name}}</span></h4>
             </div>
 
+            <div layout="row" layout-align="left center">
+              <a href="data:application/json;charset=utf-8,{{vm.downloadJson()}}"
+  download="download.json">Download </a>
+               &nbsp;&nbsp;|&nbsp;&nbsp;
+               <input type="file" id="file" name="file"/>
+               <a href="#" ng-click="vm.uploadJson()"> Upload</a>
+            </div>
+
               <md-content layout="row" layout-sm="column" layout-xs="column">
 
                   <md-card flex="100" flex-gt-sm="60" flex-order-sm="2" flex-order-xs="2">
