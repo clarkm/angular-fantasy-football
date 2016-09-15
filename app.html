@@ -31,10 +31,18 @@
 
             <div layout="row" layout-align="left center">
               <a href="data:application/json;charset=utf-8,{{vm.downloadJson()}}"
-  download="download.json">Download </a>
+  download="download.json">Download Teams </a>
                &nbsp;&nbsp;|&nbsp;&nbsp;
                <input type="file" id="file" name="file"/>
-               <a href="#" ng-click="vm.uploadJson()"> Upload</a>
+               <a href="#" ng-click="vm.uploadJson()"> Upload Teams</a>
+            </div>
+
+            <div layout="row" layout-align="left center">
+              <a href="data:application/json;charset=utf-8,{{vm.downloadJson()}}"
+  download="download.json">Download Everything</a>
+               &nbsp;&nbsp;|&nbsp;&nbsp;
+               <input type="file" id="fileEverything" name="fileEverything"/>
+               <a href="#" ng-click="vm.uploadEverythingJson()"> Upload Everything</a>
             </div>
 
               <md-content layout="row" layout-sm="column" layout-xs="column">

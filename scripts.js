@@ -227,8 +227,17 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
         };
 
         vm.downloadJson = function () {
-          var json = JSON.stringify(vm.teams);
-          return JSON.stringify(vm.teams);
+          var teamsJson = vm.teams;
+          var allPlayersJson = vm.players;
+          var both = teamsJson + allPlayersJson;
+
+          var dict = []; // create an empty array
+          dict.push({
+              players: allPlayersJson,
+              teams: teamsJson
+          });
+
+          return dict;
         };
 
         vm.uploadJson = function () {
@@ -236,6 +245,15 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
           $http.get(file)
            .then(function(res){
               vm.teams = res.data;
+            });
+        };
+
+        vm.uploadEverythingJson = function () {
+          var file = document.getElementById('fileEverything').files[0].name;
+          $http.get(file)
+           .then(function(res){
+              vm.teams = res.data[0].teams;
+              vm.players = res.data[0].players;
             });
         };
 
