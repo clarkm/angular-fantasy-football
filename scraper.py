@@ -15,12 +15,12 @@ table = soup.find_all('tbody')[0]
 for tag in table.find_all('tr'):
     player = {}
     data = tag.find_all('td')
-    team = tag.find_all('small')
+    # team = tag.find_all('small')
 
     if data[0]:
         player['rank'] = data[0].text if len(data) > 1 else None
     if len(data) > 1:
-        player['name'] = data[1].find_all('a')[0].text
+        player['name'] = data[1].find_all('a')[0].text if len(data[1].find_all('a')) > 1 else None
     if len(data) > 2:
         player['pos'] = data[2].text
     if len(data) > 3:
