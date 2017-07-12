@@ -106,7 +106,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
               vm.selectedTeam = vm.teams[vm.index2];
               vm.teamString = '';
             } else {
-              vm.showSimpleToast("You've reach the maximum number of teams: " + vm.teamSelectNumber);
+              vm.showSimpleToast("You've reached the maximum number of teams: " + vm.teamSelectNumber);
             }
         };
 
