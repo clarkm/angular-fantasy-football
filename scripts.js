@@ -5,9 +5,9 @@ window.onbeforeunload = function() {
 var app = angular.module("app", ['ngMaterial', 'ngMessages']);
 app.factory('myService', function($http) {
   var myService = {
-    players: function() {
+    players: function(endpoint) {
       // $http returns a promise, which has a then function, which also returns a promise
-      var promise = $http.get('output.json').then(function (response) {
+      var promise = $http.get(endpoint).then(function (response) {
         // The then function here is an opportunity to modify the response
         // The return value gets picked up by the then in the controller.
         return response.data;
@@ -82,9 +82,12 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
         vm.players = [];
         vm.maxPlayersPerTeam = 16;
 
-        myService.players().then(function(data){
-            vm.players = data;
-        });
+        vm.selectSource = function (sourceName) {
+            myService.players(sourceName + '-output.json').then(function(data){
+              vm.players = data;
+            });
+        }
+
         vm.sortType = 'rank*1';
         vm.value = '';
 

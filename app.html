@@ -14,6 +14,8 @@
             <md-toolbar layout="row" style="background-color:rgb(0,82,135);">
               <div class="md-toolbar-tools">
                 <h3>Live Hive</h3>
+                <button ng-click="vm.selectSource('fantasypros')">fantasyPros</button>
+                <button ng-click="vm.selectSource('fftoolbox')">FFToolbox</button>
                 <span flex></span>
                 <a href="#" ng-click="vm.resetEverything()" style="margin-right:5px;">Reset All</a> |
                 Settings: <md-button class="md-icon-button" aria-label="Settings" ng-click="vm.showAdvanced($event)">
