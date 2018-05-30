@@ -74,6 +74,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
         var vm = this;
 
         vm.searchTerm = '';
+        vm.writeIn = {};
         vm.addActive = false;
         vm.disableTeamCreator = false;
         vm.teamSelectNumber = 12;
@@ -86,6 +87,18 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
             myService.players(sourceName + '-output.json').then(function(data){
               vm.players = data;
             });
+        }
+
+        vm.addWriteIn = function (writeIn) {
+          newPlayer = {
+            rank: vm.writeIn.rank,
+            name: vm.writeIn.name,
+            pos: vm.writeIn.pos,
+            team: vm.writeIn.team,
+            bye: vm.writeIn.bye
+          }
+          vm.players.push(newPlayer);
+          vm.writeIn = {};
         }
 
         vm.sortType = 'rank*1';
