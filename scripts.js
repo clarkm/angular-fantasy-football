@@ -78,6 +78,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
         vm.addActive = false;
         vm.disableTeamCreator = false;
         vm.teamSelectNumber = 12;
+        vm.roundCounter = 1;
 
         vm.selectedTeam = null;
         vm.players = [];
@@ -213,6 +214,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
                         if (vm.index2 % vm.teams.length === 0) {
                           vm.index2 -= 1;
                           vm.moveInReverse = true;
+                          vm.roundCounter += 1;
                         }
 
                       vm.selectedTeam = vm.teams[vm.index2];
@@ -222,6 +224,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
                         if ((vm.index2 % vm.teams.length +1) === 0) {
                           vm.index2 = 0;
                           vm.moveInReverse = false;
+                          vm.roundCounter += 1;
                         }
                       vm.selectedTeam = vm.teams[vm.index2];
                       return;
