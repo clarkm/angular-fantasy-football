@@ -75,13 +75,13 @@
                             <span></span>
                             <span></span>
                             <span ng-if="item.players.length" layout="row" style="font-size: 80%;">
-                              <b>Total: <br />{{item.players.length}}</b>
-                              <b>WR:  <br />{{ vm.countPos(item.players,'WR') }}</b>
-                              <b>RB:  <br />{{ vm.countPos(item.players,'RB') }}</b>
-                              <b>QB:  <br />{{ vm.countPos(item.players,'QB') }}</b>
-                              <b>TE:  <br />{{ vm.countPos(item.players,'TE') }}</b>
-                              <b>DST:  <br />{{ vm.countPos(item.players,'DST') }}</b>
-                              <b>K:  <br />{{ vm.countPos(item.players,'K') }}</b>
+                              <b style="color:white;text-shadow: 1px 1px 1px #444;text-align:center;">Total: <br />{{item.players.length}}</b>
+                              <b style="color:#69A957;text-shadow: 1px 1px 1px #444;text-align:center;">WR:  <br />{{ vm.countPos(item.players,'WR') }}</b>
+                              <b style="color:#041563;text-shadow: 1px 1px 1px #444;text-align:center;">RB:  <br />{{ vm.countPos(item.players,'RB') }}</b>
+                              <b style="color:#FCBF05;text-shadow: 1px 1px 1px #444;text-align:center;">QB:  <br />{{ vm.countPos(item.players,'QB') }}</b>
+                              <b style="color:#DB3E74;text-shadow: 1px 1px 1px #444;text-align:center;">TE:  <br />{{ vm.countPos(item.players,'TE') }}</b>
+                              <b style="color:#A71020;text-shadow: 1px 1px 1px #444;text-align:center;">DST:  <br />{{ vm.countPos(item.players,'DST') }}</b>
+                              <b style="color:white;text-shadow: 1px 1px 1px #444;text-align:center;">K:  <br />{{ vm.countPos(item.players,'K') }}</b>
                             </span>
                             <a href="#" ng-click="vm.removeTeam(item)">X</a>
                             <span class="md-subhead" style="color:crimson;" ng-if="item.error">error message</span>
