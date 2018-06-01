@@ -28,7 +28,7 @@
             <div class="container" layout="column" layout-wrap>
 
             <div layout="row" layout-align="center center">
-              <h4>Round: {{vm.roundCounter}} | On the Clock: <span style="font-size:200%;">{{vm.teams[vm.index2].name}}</span></h4>
+              <h4>Round: <input style="width:30px;" type="number" ng-model="vm.roundCounter" /> | On the Clock: <span style="font-size:200%;">{{vm.teams[vm.index2].name}}</span></h4>
             </div>
 
             <div layout="row" layout-align="left center">
@@ -69,7 +69,7 @@
                         <md-subheader style="padding:0;position:absolute;top:0;width:100%;">
                           <md-card-header-text layout="row" layout-align="space-between center">
                             <span>{{ $index + 1 }}</span>
-                            <span class="md-title" style="height: 36px;"><md-input-container style="margin:0;"><input aria-label="Team Name" ng-model="item.name" /></md-input-container></span>
+                            <span class="md-title" style="height: 36px;"><md-input-container style="margin:0;"><input aria-label="Team Name" ng-model="item.name" placeholder="name" /></md-input-container></span>
                             <span></span>
                             <span></span>
                             <span></span>
