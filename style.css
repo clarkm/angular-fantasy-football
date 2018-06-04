@@ -60,3 +60,4 @@
   [ng-class*=K] {background-color: white;color:rgba(0,0,0,0.87) !important;text-decoration: none;padding: 7px;}
 
   .md-subheader ._md-subheader-inner {padding: 3px 15px;}
+.team-card label {font-size:50%;}
