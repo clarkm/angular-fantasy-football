@@ -1,188 +1,236 @@
 <!DOCTYPE html>
 <html ng-app="app">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body ng-cloak>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body ng-cloak>
 
-    <div ng-controller="appController as vm">
+  <div ng-controller="appController as vm">
 
-      <div layout="column">
+    <div layout="column">
 
+      <md-toolbar layout="row" style="background-color:rgb(0,82,135);">
+        <div class="md-toolbar-tools">
+          <div flex>
+            <h3>Live Drafter</h3>
+            <!-- put active & disabled depending on source selection  -->
+            <md-button ng-click="vm.selectSource('fantasypros')">fantasyPros</md-button>
+            <md-button ng-click="vm.selectSource('fftoolbox')">FFToolbox</md-button>
+          </div>
+          <div flex style="font-size:60%;">
+            <div>
+              <a href="data:application/json;charset=utf-8,{{vm.downloadJson()}}" download="download.json">Download Teams </a>
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              <input type="file" id="file" name="file" />
+              <a href="#" ng-click="vm.uploadJson()"> Upload Teams</a>
+            </div>
+
+            <div flex>
+              <a href="data:application/json;charset=utf-8,{{vm.downloadJson()}}" download="download.json">Download Everything</a>
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              <input type="file" id="fileEverything" name="fileEverything" />
+              <a href="#" ng-click="vm.uploadEverythingJson()"> Upload Everything</a>
+            </div>
+          </div>
+          <div>
+            <a href="#" ng-click="vm.resetEverything()" style="margin-right:5px;">Reset All</a> | Settings:
+            <md-button class="md-icon-button" aria-label="Settings" ng-click="vm.showAdvanced($event)">
+              <md-icon aria-hidden="false" style="color:white;" md-svg-src="gears.svg"></md-icon>
+            </md-button>
+          </div>
+        </div>
+      </md-toolbar>
+
+
+      <div class="container" layout="column" layout-wrap>
+
+        <div layout="row" layout-align="center center">
+          <h4>Round:
+            <input style="width:30px;" type="number" ng-model="vm.roundCounter" /> | On the Clock:
+            <u>{{vm.teams[vm.index2].name}}</u>
+          </h4>
+        </div>
+
+        <md-content layout="row" layout-sm="column" layout-xs="column">
+
+          <md-card flex="100" flex-gt-sm="60" flex-order-sm="2" flex-order-xs="2">
             <md-toolbar layout="row" style="background-color:rgb(0,82,135);">
-              <div class="md-toolbar-tools">
-                <h3>Live Hive</h3>
-                <md-button ng-click="vm.selectSource('fantasypros')">fantasyPros</md-button>
-                <md-button ng-click="vm.selectSource('fftoolbox')">FFToolbox</md-button>
-                <span flex></span>
-                <a href="#" ng-click="vm.resetEverything()" style="margin-right:5px;">Reset All</a> |
-                Settings: <md-button class="md-icon-button" aria-label="Settings" ng-click="vm.showAdvanced($event)">
-                  <md-icon aria-hidden="false" style="color:white;" md-svg-src="gears.svg"></md-icon>
-                </md-button>
-              </div>
+              <h3>Teams ({{vm.teams.length}} of {{vm.teamSelectNumber}})</h3>
+            </md-toolbar>
+
+            <form ng-submit="vm.addTeam(vm.teamString)">
+              <md-input-container class="md-block">
+                <label>Team Name</label>
+                <input ng-model="vm.teamString" input-clear>
+                <md-button type="submit">add team</md-button>
+              </md-input-container>
+            </form>
+
+            <div layout="row" layout-wrap>
+
+              <md-card flex="30" flex-sm="45" flex-xs="100" style="height:30vh;overflow:hidden;position:relative;" ng-repeat="item in vm.teams"
+                ng-click="vm.updateSelectedTeam(item);" ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected'">
+                <md-subheader style="padding:0;position:absolute;top:0;width:100%;">
+                  <md-card-header-text layout="row" layout-align="space-between center">
+                    <span>{{ $index + 1 }}</span>
+                    <span class="team-card md-title" style="height: 36px;">
+                      <md-input-container style="margin:0;">
+                        <input aria-label="Team Name" ng-model="item.name" placeholder="name" />
+                      </md-input-container>
+                    </span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span ng-if="item.players.length" layout="row" style="font-size: 80%;">
+                      <b style="color:white;text-shadow: 1px 1px 1px #444;text-align:center;">Total:
+                        <br />{{item.players.length}}</b>
+                      <b style="color:#69A957;text-shadow: 1px 1px 1px #444;text-align:center;">WR:
+                        <br />{{ vm.countPos(item.players,'WR') }}</b>
+                      <b style="color:#041563;text-shadow: 1px 1px 1px #444;text-align:center;">RB:
+                        <br />{{ vm.countPos(item.players,'RB') }}</b>
+                      <b style="color:#FCBF05;text-shadow: 1px 1px 1px #444;text-align:center;">QB:
+                        <br />{{ vm.countPos(item.players,'QB') }}</b>
+                      <b style="color:#DB3E74;text-shadow: 1px 1px 1px #444;text-align:center;">TE:
+                        <br />{{ vm.countPos(item.players,'TE') }}</b>
+                      <b style="color:#A71020;text-shadow: 1px 1px 1px #444;text-align:center;">DST:
+                        <br />{{ vm.countPos(item.players,'DST') }}</b>
+                      <b style="color:white;text-shadow: 1px 1px 1px #444;text-align:center;">K:
+                        <br />{{ vm.countPos(item.players,'K') }}</b>
+                    </span>
+                    <a href="#" ng-click="vm.removeTeam(item)">X</a>
+                    <span class="md-subhead" style="color:crimson;" ng-if="item.error">error message</span>
+                  </md-card-header-text>
+                </md-subheader>
+
+                <md-card-content style="padding:8px;position: absolute;width: 100%;top: 34px;overflow: scroll;height: 80%;">
+                  <p layout="row" layout-align="space-around center" ng-repeat="player in item.players | orderBy:sortTeamType:sortTeamReverse track by $index"
+                    style="margin:0;padding:0;" ng-class="{{player.pos}}">
+                    <span flex="5" style="background-color:white;color:black;padding:10px 0;">{{$index + 1}}:</span>
+                    <span flex="10" style="text-align:center;">{{player.rank}}</span>
+                    <span flex="35">{{player.name}}</span>
+                    <span flex="15">{{player.pos}}</span>
+                    <span flex="15">{{player.team}}</span>
+                    <span flex="10">{{player.bye}}</span>
+                    <span flex="10">
+                      <md-button ng-click="vm.removePlayer(player, item, $index)" style="margin:0;min-width:10px;color:crimson;text-shadow: 2px 2px 3px rgba(255,255,255,0.7);">X</md-button>
+                    </span>
+                  </p>
+                </md-card-content>
+              </md-card>
+
+
+            </div>
+          </md-card>
+
+
+          <md-card flex="100" flex-gt-sm="40" flex-order-sm="1" flex-order-xs="1">
+            <md-toolbar layout="row" layout-align="space-between center" style="background-color:rgb(0,82,135);">
+              <h3>Players</h3>
+              <span></span>
+              <span></span>
+              <span></span>
+              <p class="key">
+                <a href="#" ng-click="vm.buttonSearchTerm = ''" ng-class="K">ALL</a>
+                <a href="#" ng-click="vm.buttonSearchTerm = 'WR'" ng-class="WR">WR</a>
+                <a href="#" ng-click="vm.buttonSearchTerm = 'RB'" ng-class="RB">RB</a>
+                <a href="#" ng-click="vm.buttonSearchTerm = 'TE'" ng-class="TE">TE</a>
+                <a href="#" ng-click="vm.buttonSearchTerm = 'QB'" ng-class="QB">QB</a>
+                <a href="#" ng-click="vm.buttonSearchTerm = 'DST'" ng-class="DST">DST</a>
+                <a href="#" ng-click="vm.buttonSearchTerm = 'K'" ng-class="K" style="margin-right: 5px;">K</a>
+              </p>
             </md-toolbar>
 
 
-            <div class="container" layout="column" layout-wrap>
+            <md-input-container class="md-block">
+              <label>Search anything...</label>
+              <input ng-model="vm.searchTerm" input-clear>
+            </md-input-container>
 
-            <div layout="row" layout-align="center center">
-              <h4>Round: <input style="width:30px;" type="number" ng-model="vm.roundCounter" /> | On the Clock: <span style="font-size:200%;">{{vm.teams[vm.index2].name}}</span></h4>
-            </div>
+            <md-toolbar layout="row" class="md-hue-3" style="background-color: rgb(250,250,250);border-bottom: 1px solid #eee;">
+              <div class="md-toolbar-tools">
+                <div flex="10">
+                  <a href="#" ng-click="vm.sortType = 'rank*1'; sortReverse = !sortReverse">Rank
+                    <span ng-show="vm.sortType == 'rank*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                    <span ng-show="vm.sortType == 'rank*1' && sortReverse" class="fa fa-caret-up">&#9650;</span>
+                  </a>
+                </div>
+                <div flex="35">
+                  <a href="#" ng-click="vm.sortType = 'name'; sortReverse = !sortReverse">Name
+                    <span ng-show="vm.sortType == 'name' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                    <span ng-show="vm.sortType == 'name' && sortReverse" class="fa fa-caret-up">&#9650;</span>
+                </div>
+                <div flex="15">
+                  <a href="#" ng-click="vm.sortType = 'pos'; sortReverse = !sortReverse">Position
+                    <span ng-show="vm.sortType == 'pos' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                    <span ng-show="vm.sortType == 'pos' && sortReverse" class="fa fa-caret-up">&#9650;</span>
+                  </a>
+                </div>
+                <div flex="15">
+                  <a href="#" ng-click="vm.sortType = 'team'; sortReverse = !sortReverse">Team
+                    <span ng-show="vm.sortType == 'team' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                    <span ng-show="vm.sortType == 'team' && sortReverse" class="fa fa-caret-up">&#9650;</span>
+                  </a>
+                </div>
+                <div flex="10">
+                  <a href="#" ng-click="vm.sortType = 'bye*1'; sortReverse = !sortReverse">Bye
+                    <span ng-show="vm.sortType == 'bye*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
+                    <span ng-show="vm.sortType == 'bye*1' && sortReverse" class="fa fa-caret-up">&#9650;</span>
+                  </a>
+                </div>
+                <div flex="15">Add</div>
+              </div>
+            </md-toolbar>
+            <md-content style="height: 72vh;">
+              <md-list>
+                <md-list-item ng-repeat="player in vm.players | orderBy:vm.sortType:sortReverse | filter:vm.searchTerm | filter:{pos:vm.buttonSearchTerm} track by $index"
+                  ng-class="{{player.pos}}">
+                  <div flex="10" style="text-align:center;">{{player.rank}}</div>
+                  <div flex="35">{{player.name}}</div>
+                  <div flex="15">{{player.pos}}</div>
+                  <div flex="15">{{player.team}}</div>
+                  <div flex="10">{{player.bye}}</div>
+                  <div flex="15">
+                    <md-button class="md-raised" ng-click="vm.addPlayer(player)">Add</md-button>
+                  </div>
+                  <md-divider inset></md-divider>
+                </md-list-item>
+              </md-list>
+            </md-content>
 
-            <div layout="row" layout-align="left center">
-              <a href="data:application/json;charset=utf-8,{{vm.downloadJson()}}"
-  download="download.json">Download Teams </a>
-               &nbsp;&nbsp;|&nbsp;&nbsp;
-               <input type="file" id="file" name="file"/>
-               <a href="#" ng-click="vm.uploadJson()"> Upload Teams</a>
-            </div>
-
-            <div layout="row" layout-align="left center">
-              <a href="data:application/json;charset=utf-8,{{vm.downloadJson()}}"
-  download="download.json">Download Everything</a>
-               &nbsp;&nbsp;|&nbsp;&nbsp;
-               <input type="file" id="fileEverything" name="fileEverything"/>
-               <a href="#" ng-click="vm.uploadEverythingJson()"> Upload Everything</a>
-            </div>
-
-              <md-content layout="row" layout-sm="column" layout-xs="column">
-
-                  <md-card flex="100" flex-gt-sm="60" flex-order-sm="2" flex-order-xs="2">
-                    <md-toolbar layout="row" style="background-color:rgb(0,82,135);">
-                      <h3>Teams ({{vm.teams.length}} of {{vm.teamSelectNumber}})</h3>
-                    </md-toolbar>
-
-                    <form ng-submit="vm.addTeam(vm.teamString)">
-                      <md-input-container class="md-block">
-                        <label>Team Name</label>
-                        <input ng-model="vm.teamString" input-clear>
-                        <md-button type="submit">add team</md-button>
-                      </md-input-container>
-                    </form>
-
-                  <div layout="row" layout-wrap>
-
-                      <md-card flex="30" flex-sm="45" flex-xs="100" style="height:30vh;overflow:hidden;position:relative;" ng-repeat="item in vm.teams" ng-click="vm.updateSelectedTeam(item);"
-                      ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected'">
-                        <md-subheader style="padding:0;position:absolute;top:0;width:100%;">
-                          <md-card-header-text layout="row" layout-align="space-between center">
-                            <span>{{ $index + 1 }}</span>
-                            <span class="md-title" style="height: 36px;"><md-input-container style="margin:0;"><input aria-label="Team Name" ng-model="item.name" placeholder="name" /></md-input-container></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span ng-if="item.players.length" layout="row" style="font-size: 80%;">
-                              <b style="color:white;text-shadow: 1px 1px 1px #444;text-align:center;">Total: <br />{{item.players.length}}</b>
-                              <b style="color:#69A957;text-shadow: 1px 1px 1px #444;text-align:center;">WR:  <br />{{ vm.countPos(item.players,'WR') }}</b>
-                              <b style="color:#041563;text-shadow: 1px 1px 1px #444;text-align:center;">RB:  <br />{{ vm.countPos(item.players,'RB') }}</b>
-                              <b style="color:#FCBF05;text-shadow: 1px 1px 1px #444;text-align:center;">QB:  <br />{{ vm.countPos(item.players,'QB') }}</b>
-                              <b style="color:#DB3E74;text-shadow: 1px 1px 1px #444;text-align:center;">TE:  <br />{{ vm.countPos(item.players,'TE') }}</b>
-                              <b style="color:#A71020;text-shadow: 1px 1px 1px #444;text-align:center;">DST:  <br />{{ vm.countPos(item.players,'DST') }}</b>
-                              <b style="color:white;text-shadow: 1px 1px 1px #444;text-align:center;">K:  <br />{{ vm.countPos(item.players,'K') }}</b>
-                            </span>
-                            <a href="#" ng-click="vm.removeTeam(item)">X</a>
-                            <span class="md-subhead" style="color:crimson;" ng-if="item.error">error message</span>
-                          </md-card-header-text>
-                        </md-subheader>
-
-                        <md-card-content style="padding:8px;position: absolute;width: 100%;top: 34px;overflow: scroll;height: 80%;">
-                          <p layout="row" layout-align="space-around center" ng-repeat="player in item.players | orderBy:sortTeamType:sortTeamReverse track by $index" style="margin:0;padding:0;" ng-class="{{player.pos}}">
-                              <span flex="5" style="background-color:white;color:black;padding:10px 0;">{{$index + 1}}:</span>
-                              <span flex="10" style="text-align:center;">{{player.rank}}</span>
-                              <span flex="35">{{player.name}}</span>
-                              <span flex="15">{{player.pos}}</span>
-                              <span flex="15">{{player.team}}</span>
-                              <span flex="10">{{player.bye}}</span>
-                              <span flex="10"><md-button ng-click="vm.removePlayer(player, item, $index)" style="margin:0;min-width:10px;color:crimson;text-shadow: 2px 2px 3px rgba(255,255,255,0.7);">X</md-button></span>
-                          </p>
-                        </md-card-content>
-                      </md-card>
-
-
-                   </div>
-                  </md-card>
+            <label>Write-in player</label>
+            <md-list-item>
+              <div flex="10" style="text-align:center;">
+                <input ng-model="vm.writeIn.rank" placeholder="rank" />
+              </div>
+              <div flex="35">
+                <input ng-model="vm.writeIn.name" placeholder="name" />
+              </div>
+              <div flex="15">
+                <input ng-model="vm.writeIn.pos" placeholder="pos" />
+              </div>
+              <div flex="15">
+                <input ng-model="vm.writeIn.team" placeholder="team" />
+              </div>
+              <div flex="10">
+                <input ng-model="vm.writeIn.bye" placeholder="bye" />
+              </div>
+              <div flex="15">
+                <md-button class="md-raised" ng-click="vm.addWriteIn(vm.writeIn)">Add</md-button>
+              </div>
+            </md-list-item>
 
 
-                  <md-card flex="100" flex-gt-sm="40" flex-order-sm="1" flex-order-xs="1">
-                    <md-toolbar layout="row" layout-align="space-between center" style="background-color:rgb(0,82,135);">
-                      <h3>Players</h3>
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                      <p class="key">
-                        <a href="#" ng-click="vm.buttonSearchTerm = ''" ng-class="K">ALL</a>
-                        <a href="#" ng-click="vm.buttonSearchTerm = 'WR'" ng-class="WR">WR</a>
-                        <a href="#" ng-click="vm.buttonSearchTerm = 'RB'" ng-class="RB">RB</a>
-                        <a href="#" ng-click="vm.buttonSearchTerm = 'TE'" ng-class="TE">TE</a>
-                        <a href="#" ng-click="vm.buttonSearchTerm = 'QB'" ng-class="QB">QB</a>
-                        <a href="#" ng-click="vm.buttonSearchTerm = 'DST'" ng-class="DST">DST</a>
-                        <a href="#" ng-click="vm.buttonSearchTerm = 'K'" ng-class="K" style="margin-right: 5px;">K</a>
-                      </p>
-                    </md-toolbar>
+          </md-card>
 
+        </md-content>
+      </div>
 
-                  <md-input-container class="md-block">
-                    <label>Search anything...</label>
-                    <input ng-model="vm.searchTerm" input-clear>
-                  </md-input-container>
+    </div>
 
-                  <md-toolbar layout="row" class="md-hue-3" style="background-color: rgb(250,250,250);border-bottom: 1px solid #eee;">
-                    <div class="md-toolbar-tools">
-                      <div flex="10"><a href="#" ng-click="vm.sortType = 'rank*1'; sortReverse = !sortReverse">Rank
-                        <span ng-show="vm.sortType == 'rank*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-                        <span ng-show="vm.sortType == 'rank*1' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></div>
-                      <div flex="35"><a href="#" ng-click="vm.sortType = 'name'; sortReverse = !sortReverse">Name
-                        <span ng-show="vm.sortType == 'name' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-                        <span ng-show="vm.sortType == 'name' && sortReverse" class="fa fa-caret-up">&#9650;</span></div>
-                      <div flex="15"><a href="#" ng-click="vm.sortType = 'pos'; sortReverse = !sortReverse">Position
-                        <span ng-show="vm.sortType == 'pos' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-                        <span ng-show="vm.sortType == 'pos' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></div>
-                      <div flex="15"><a href="#" ng-click="vm.sortType = 'team'; sortReverse = !sortReverse">Team
-                        <span ng-show="vm.sortType == 'team' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-                        <span ng-show="vm.sortType == 'team' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></div>
-                      <div flex="10"><a href="#" ng-click="vm.sortType = 'bye*1'; sortReverse = !sortReverse">Bye
-                        <span ng-show="vm.sortType == 'bye*1' && !sortReverse" class="fa fa-caret-down">&#9660;</span>
-                        <span ng-show="vm.sortType == 'bye*1' && sortReverse" class="fa fa-caret-up">&#9650;</span></a></div>
-                      <div flex="15">Add</div>
-                    </div>
-                  </md-toolbar>
-                  <md-content style="height: 72vh;">
-                    <md-list>
-                      <md-list-item ng-repeat="player in vm.players | orderBy:vm.sortType:sortReverse | filter:vm.searchTerm | filter:{pos:vm.buttonSearchTerm} track by $index" ng-class="{{player.pos}}">
-                          <div flex="10" style="text-align:center;">{{player.rank}}</div>
-                          <div flex="35">{{player.name}}</div>
-                          <div flex="15">{{player.pos}}</div>
-                          <div flex="15">{{player.team}}</div>
-                          <div flex="10">{{player.bye}}</div>
-                          <div flex="15"><md-button class="md-raised" ng-click="vm.addPlayer(player)">Add</md-button></div>
-                        <md-divider inset></md-divider>
-                      </md-list-item>
-                    </md-list>
-                  </md-content>
-
-                    <label>Write-in player</label>
-                    <md-list-item>
-                      <div flex="10" style="text-align:center;">
-                        <input ng-model="vm.writeIn.rank" placeholder="rank" /></div>
-                      <div flex="35"><input ng-model="vm.writeIn.name" placeholder="name" /></div>
-                      <div flex="15"><input ng-model="vm.writeIn.pos" placeholder="pos" /></div>
-                      <div flex="15"><input ng-model="vm.writeIn.team" placeholder="team" /></div>
-                      <div flex="10"><input ng-model="vm.writeIn.bye" placeholder="bye" /></div>
-                      <div flex="15"><md-button class="md-raised" ng-click="vm.addWriteIn(vm.writeIn)">Add</md-button></div>
-                    </md-list-item>
-
-
-                </md-card>
-
-              </md-content>
-            </div>
-
-        </div>
-
-        <script type="text/ng-template" id="dialog1.tmpl.html"><md-dialog aria-label="Settings Dialog" ng-cloak>
+    <script type="text/ng-template" id="dialog1.tmpl.html"><md-dialog aria-label="Settings Dialog" ng-cloak>
           <form>
             <md-toolbar style="background-color:rgb(0,82,135);">
               <div class="md-toolbar-tools">
@@ -217,21 +265,22 @@
         </md-dialog>
         </script>
 
-    </div>
+  </div>
 
-     <!-- Angular Material requires Angular.js Libraries -->
-     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
-     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
-     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.js"></script>
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.js"></script>
 
-     <!-- Angular Material Library -->
-     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
 
 
-    <script src="scripts.js"></script>
+  <script src="scripts.js"></script>
 
-  </body>
+</body>
+
 </html>
