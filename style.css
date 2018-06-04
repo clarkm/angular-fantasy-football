@@ -61,3 +61,4 @@
 
   .md-subheader ._md-subheader-inner {padding: 3px 15px;}
 .team-card label {font-size:50%;}
+.sourceSelected {border-bottom:5px solid red;color: white !important;}

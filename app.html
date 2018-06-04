@@ -15,9 +15,8 @@
         <div class="md-toolbar-tools">
           <div flex>
             <h3>Live Drafter</h3>
-            <!-- put active & disabled depending on source selection  -->
-            <md-button ng-click="vm.selectSource('fantasypros')">fantasyPros</md-button>
-            <md-button ng-click="vm.selectSource('fftoolbox')">FFToolbox</md-button>
+            <md-button ng-click="vm.selectSource('fantasypros')" ng-class="{sourceSelected: vm.sourceSelected == 'fantasypros'}" ng-disabled="vm.sourceSelected">fantasyPros</md-button>
+            <md-button ng-click="vm.selectSource('fftoolbox')" ng-class="{sourceSelected: vm.sourceSelected == 'fftoolbox'}" ng-disabled="vm.sourceSelected">FFToolbox</md-button>
           </div>
           <div flex style="font-size:60%;">
             <div>

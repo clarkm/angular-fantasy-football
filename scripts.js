@@ -83,8 +83,10 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
         vm.selectedTeam = null;
         vm.players = [];
         vm.maxPlayersPerTeam = 16;
+        vm.sourceSelected = null;
 
         vm.selectSource = function (sourceName) {
+          vm.sourceSelected = sourceName;
             myService.players(sourceName + '-output.json').then(function(data){
               vm.players = data;
             });
@@ -159,6 +161,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
                 }
                   vm.teams = [];
                   vm.addActive = true;vm.disableTeamCreator = false;
+                  vm.sourceSelected = null;
                 }
               }
             };
