@@ -1,9 +1,4 @@
 old/*
+libs/*
 gears.svg
-output.json
-
-output.json-bk
-
-fox-output.json
-
-download.json
+*.json

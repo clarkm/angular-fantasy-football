@@ -1,38 +1,37 @@
 #!/usr/bin/python
-import requests
 from bs4 import BeautifulSoup
+from urllib2 import urlopen
+import re
 import json
 
-url = "http://www.foxsports.com/fantasy/football/story/top-200-fantasy-football-player-rankings-draft-strategy-051716"
+soup = BeautifulSoup(urlopen("http://www.foxsports.com/fantasy/football/gallery/2017-top-225-fantasy-football-player-rankings-draft-strategy-050817"))
 
-soup = BeautifulSoup(requests.get(url).text)
-
-file = open('fox-output.json','w')
+file = open('output.json','w')
 
 playerList = []
 
 table = soup.find_all('tbody')[0]
 
-playerList = []
-
 for tag in table.find_all('tr'):
+    player = {}
     data = tag.find_all('td')
+    # team = tag.find_all('small')
+
     if data[0]:
-        wholePlayer = data[0].text.replace(u'\xa0', u' ')
-        newPlayer = wholePlayer.split(' ')
+        player['rank'] = data[0].text if len(data) > 1 else None
+    if len(data) > 1:
+        player['name'] = data[1].find_all('a')[0].text if len(data[1].find_all('a')) > 1 else None
+    if len(data) > 2:
+        player['pos'] = data[2].text
+    if len(data) > 3:
+        player['bye'] = data[3].text
+    if len(data) > 1:
+        if data[1].find_all('small'):
+            player['team'] = data[1].find_all('small')[0].text
 
-        player = {}
 
-        if len(newPlayer) > 0:
-          player['rank'] = newPlayer[0]
-        if len(newPlayer) > 2:
-          player['name'] = newPlayer[1] + ' ' + newPlayer[2]
-        if len(newPlayer) > 3:
-          player['team'] = newPlayer[3].replace(u'(', u'')
-        if len(newPlayer) > 5:
-          player['pos'] = newPlayer[5].replace(u')', u'')
 
-          playerList.append(player)
+    playerList.append(player)
 
 jsonStr = json.dumps(playerList)
 print jsonStr

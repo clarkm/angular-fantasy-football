@@ -1,0 +1,20 @@
+runtime: python27
+api_version: 1
+threadsafe: false
+
+handlers:
+- url: /
+  static_files: app.html
+  upload: app.html
+
+- url: /scripts.js
+  static_files: scripts.js
+  upload: scripts.js
+
+- url: /style.css
+  static_files: style.css
+  upload: style.css
+
+- url: /json
+  script: fantasypros-scraper.py
+

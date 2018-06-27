@@ -43,8 +43,8 @@
   }
 
   .selected{
-    -webkit-box-shadow: 0 4px 12px 0 rgba(0,82,135,.2),0 4px 4px 0 rgba(0,82,135,.14),0 8px 4px -4px rgba(0,82,135,.12);
-    box-shadow: 0 4px 12px 0 rgba(0,82,135,.2),0 4px 4px 0 rgba(0,82,135,.14),0 8px 4px -4px rgba(0,82,135,.12);
+    -webkit-box-shadow: 0 4px 12px 0 rgba(0,82,135,.5),0 4px 4px 0 rgba(0,82,135,.5),0 8px 4px -4px rgba(0,82,135,.5);
+    box-shadow: 0 4px 12px 0 rgba(0,82,135,.5),0 4px 4px 0 rgba(0,82,135,.5),0 8px 4px -4px rgba(0,82,135,.5);
   }
 
 
