@@ -8,3 +8,11 @@ Sort by team, position, rank, bye week, etc. Then add a player to up to 12 teams
 Setting for 8,10,12 team leagues, and 15,16,17,18 players.
 Much easier than manually crossing off players with pen & paper during a live draft!
 Source player rank data from fantasypros.com with many more sources to come!
+
+
+deploy with: gcloud app deploy .
+website is footballscraper.appspot.com
+
+followed directions from here: https://medium.com/@lucas.abgodoy/building-a-rest-api-on-google-app-engine-based-on-web-scraping-d1ebef594d52
+and here: https://stackoverflow.com/questions/14638262/python-2-7-how-to-use-beautifulsoup-in-google-app-engine
+to get this working

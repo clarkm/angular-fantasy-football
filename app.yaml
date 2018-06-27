@@ -16,5 +16,5 @@ handlers:
   upload: style.css
 
 - url: /json
-  script: fantasypros-scraper.py
+  script: fantasypros-scraper.application
 
