@@ -2,3 +2,5 @@ old/*
 libs/*
 gears.svg
 *.json
+*.swp
+*.py*
