@@ -18,3 +18,5 @@ handlers:
 - url: /fantasypros-output
   script: fantasypros-scraper.application
 
+- url: /fftoolbox-output
+  script: fftoolbox-scraper.application

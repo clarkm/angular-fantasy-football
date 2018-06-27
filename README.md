@@ -16,3 +16,6 @@ website is footballscraper.appspot.com
 followed directions from here: https://medium.com/@lucas.abgodoy/building-a-rest-api-on-google-app-engine-based-on-web-scraping-d1ebef594d52
 and here: https://stackoverflow.com/questions/14638262/python-2-7-how-to-use-beautifulsoup-in-google-app-engine
 to get this working
+
+
+serve it locally for debugging with: dev_appserver.py .

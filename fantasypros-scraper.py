@@ -5,9 +5,6 @@ from bs4 import BeautifulSoup
 from urllib2 import urlopen
 import re
 import json
-# import html5lib
-# import six
-# import webencodings
 import webapp2
 
 class MainPage(webapp2.RequestHandler):
@@ -15,8 +12,6 @@ class MainPage(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = "application/json"
 
         soup = BeautifulSoup(urlopen("https://www.fantasypros.com/nfl/rankings/consensus-cheatsheets.php"), "html.parser")
-
-        # file = open('fantasypros-output.json','w')
 
         playerList = []
 
