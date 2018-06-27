@@ -43,9 +43,9 @@ class MainPage(webapp2.RequestHandler):
             playerList.append(player)
 
         jsonStr = json.dumps(playerList)
-        print jsonStr
+        # print jsonStr
 
         self.response.out.write(jsonStr)
 
 application = webapp2.WSGIApplication([
-    ('/json', MainPage)], debug=True)
+    ('/fantasypros-output', MainPage)], debug=True)
