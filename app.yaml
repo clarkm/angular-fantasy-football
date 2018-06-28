@@ -15,6 +15,9 @@ handlers:
   static_files: style.css
   upload: style.css
 
+- url: /images
+  static_dir: images
+
 - url: /fantasypros-output
   script: fantasypros-scraper.application
 
