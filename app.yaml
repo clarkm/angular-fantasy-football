@@ -20,3 +20,6 @@ handlers:
 
 - url: /fftoolbox-output
   script: fftoolbox-scraper.application
+
+- url: /espn-output
+  script: espn-scraper.application
