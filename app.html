@@ -104,8 +104,8 @@
                       <b style="color:white;text-shadow: 1px 1px 1px #444;text-align:center;">K:
                         <br />{{ vm.countPos(item.players,'K') }}</b>
                     </span>
-                      <a href="#" ng-click="vm.removeTeam(item)">X</a>
-                      <a href="#" style="pointer:cursor" ng-click="vm.starTeam(item)">**</a>
+                      <span style="cursor:pointer" ng-click="vm.removeTeam(item)">X</span>
+                      <span style="cursor:pointer" ng-click="vm.starTeam(item)">&nbsp;*</span>
                     <span class="md-subhead" style="color:crimson;" ng-if="item.error">error message</span>
                   </md-card-header-text>
                 </md-subheader>
