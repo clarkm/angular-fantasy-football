@@ -287,6 +287,9 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
           $http.get(file)
            .then(function(res){
               vm.teams = res.data;
+            }).then(function(){
+            vm.addActive = true;
+            vm.selectedTeam = vm.teams[0];
             });
         };
 
@@ -296,7 +299,10 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
            .then(function(res){
               vm.teams = res.data[0].teams;
               vm.players = res.data[0].players;
-            });
+            }).then(function(){
+              vm.addActive = true;
+              vm.selectedTeam = vm.teams[0];
+              });
         };
 
         vm.removePlayer = function(item, team, index){
