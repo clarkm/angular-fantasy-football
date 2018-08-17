@@ -106,6 +106,8 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
 
         vm.sortType = 'rank*1';
         vm.value = '';
+        vm.myTeamLabel = '';
+        vm.myTeamIndex;
 
         vm.index2 = 0;
         vm.moveInReverse = false;
@@ -148,6 +150,13 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
           }
 
         };
+
+        vm.starTeam = function (team) {
+          team.myTeam = true;
+          console.log(team);
+          vm.myTeamLabel = team.name;
+          vm.myTeamIndex = vm.teams.indexOf(team);
+        }
 
         vm.resetEverything = function () {
             var areYouSure = confirm("Are you sure you want to delete EVERYTHING?");
@@ -247,6 +256,11 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
             vm.showSimpleToast('Please create a team first!');
           }
         };
+
+        vm.starPlayer = function (player) {
+          player.starred = true;
+          console.log(player)
+        }
 
         vm.downloadJson = function () {
           var teamsJson = vm.teams;

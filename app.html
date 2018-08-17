@@ -47,8 +47,10 @@
       <div class="container" layout="column" layout-wrap>
 
         <div layout="row" layout-align="center center">
-          <h4>Round:
-            <input style="width:30px;" type="number" ng-model="vm.roundCounter" /> | On the Clock:
+          <h4>My team: {{vm.myTeamLabel}} {{vm.myTeamIndex + 1}} | Round:
+            <input style="width:30px;" type="number" ng-model="vm.roundCounter" /> 
+            <!-- put -> or <- depending on reverse or not -->
+            | On the Clock:
             <u>{{vm.teams[vm.index2].name}}</u>
           </h4>
         </div>
@@ -71,10 +73,11 @@
             <div layout="row" layout-wrap>
 
               <md-card flex="30" flex-sm="45" flex-xs="100" style="height:30vh;overflow:hidden;position:relative;" ng-repeat="item in vm.teams"
-                ng-click="vm.updateSelectedTeam(item);" ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected'">
+                ng-click="vm.updateSelectedTeam(item);" ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected', item.myTeam ; 'myTeam'">
                 <md-subheader style="padding:0;position:absolute;top:0;width:100%;">
                   <md-card-header-text layout="row" layout-align="space-between center">
                     <span>{{ $index + 1 }}</span>
+                    <span ng-if="item.myTeam">ME</span>
                     <span class="team-card md-title" style="height: 36px;">
                       <md-input-container style="margin:0;">
                         <input aria-label="Team Name" ng-model="item.name" placeholder="name" />
@@ -100,7 +103,8 @@
                       <b style="color:white;text-shadow: 1px 1px 1px #444;text-align:center;">K:
                         <br />{{ vm.countPos(item.players,'K') }}</b>
                     </span>
-                    <a href="#" ng-click="vm.removeTeam(item)">X</a>
+                      <a href="#" ng-click="vm.removeTeam(item)">X</a>
+                      <a href="#" style="pointer:cursor" ng-click="vm.starTeam(item)">**</a>
                     <span class="md-subhead" style="color:crimson;" ng-if="item.error">error message</span>
                   </md-card-header-text>
                 </md-subheader>
@@ -108,12 +112,13 @@
                 <md-card-content style="padding:8px;position: absolute;width: 100%;top: 34px;overflow: scroll;height: 80%;">
                   <p layout="row" layout-align="space-around center" ng-repeat="player in item.players | orderBy:sortTeamType:sortTeamReverse track by $index"
                     style="margin:0;padding:0;" ng-class="{{player.pos}}">
+                    <span flex="5" ng-if="player.starred" style="color: gold">*</span>
                     <span flex="5" style="background-color:white;color:black;padding:10px 0;">{{$index + 1}}:</span>
                     <span flex="10" style="text-align:center;">{{player.rank}}</span>
                     <span flex="35">{{player.name}}</span>
                     <span flex="15">{{player.pos}}</span>
                     <span flex="15">{{player.team}}</span>
-                    <span flex="10">{{player.bye}}</span>
+                    <span flex="5">{{player.bye}}</span>
                     <span flex="10">
                       <md-button ng-click="vm.removePlayer(player, item, $index)" style="margin:0;min-width:10px;color:crimson;text-shadow: 2px 2px 3px rgba(255,255,255,0.7);">X</md-button>
                     </span>
@@ -187,12 +192,16 @@
               <md-list>
                 <md-list-item ng-repeat="player in vm.players | orderBy:vm.sortType:sortReverse | filter:vm.searchTerm | filter:{pos:vm.buttonSearchTerm} track by $index"
                   ng-class="{{player.pos}}">
+                  <div flex="5">
+                    <span ng-if="player.starred">STAR</span>
+                    <span class="md-raised" ng-click="vm.starPlayer(player)">**</span>
+                  </div>
                   <div flex="10" style="text-align:center;">{{player.rank}}</div>
                   <div flex="35">{{player.name}}</div>
                   <div flex="15">{{player.pos}}</div>
                   <div flex="15">{{player.team}}</div>
                   <div flex="10">{{player.bye}}</div>
-                  <div flex="15">
+                  <div flex="10">
                     <md-button class="md-raised" ng-click="vm.addPlayer(player)">Add</md-button>
                   </div>
                   <md-divider inset></md-divider>
