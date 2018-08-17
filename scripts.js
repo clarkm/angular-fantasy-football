@@ -87,7 +87,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
 
         vm.selectSource = function (sourceName) {
           vm.sourceSelected = sourceName;
-            myService.players(sourceName + '-output').then(function(data){
+            myService.players('local-scripts/' + sourceName + '-output.json').then(function(data){
               vm.players = data;
             });
         }
