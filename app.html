@@ -75,11 +75,10 @@
             <div layout="row" layout-wrap>
 
               <md-card flex="30" flex-sm="45" flex-xs="100" style="height:30vh;overflow:hidden;position:relative;" ng-repeat="item in vm.teams"
-                ng-click="vm.updateSelectedTeam(item);" ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected', item.myTeam ; 'myTeam'">
+                ng-click="vm.updateSelectedTeam(item);" ng-class="item === vm.selectedTeam || index2 === vm.teams.length - 1? 'selected' : 'notselected';item.myTeam? 'myTeam':''">
                 <md-subheader style="padding:0;position:absolute;top:0;width:100%;">
                   <md-card-header-text layout="row" layout-align="space-between center">
                     <span>{{ $index + 1 }}</span>
-                    <span ng-if="item.myTeam">ME</span>
                     <span class="team-card md-title" style="height: 36px;">
                       <md-input-container style="margin:0;">
                         <input aria-label="Team Name" ng-model="item.name" placeholder="name" />
@@ -195,7 +194,7 @@
                 <md-list-item ng-repeat="player in vm.players | orderBy:vm.sortType:sortReverse | filter:vm.searchTerm | filter:{pos:vm.buttonSearchTerm} track by $index"
                   ng-class="{{player.pos}}">
                   <div flex="5">
-                    <span ng-if="player.starred">STAR</span>
+                    <span ng-if="player.starred">FAV</span>
                     <span class="md-raised" ng-click="vm.starPlayer(player)">**</span>
                   </div>
                   <div flex="10" style="text-align:center;">{{player.rank}}</div>

@@ -52,7 +52,7 @@
   .playertable td, .playertable th {width: 16.6666667%;text-align: center;}
   .fa-caret-down, .fa-caret-up {font-size: 11px;}
   .key span {padding: 5px;}
-  [ng-class*=WR] {background-color: #69A957;color:white !important;text-decoration: none;padding: 7px;}
+  [ng-class*=WR] {background-color: rgb(105, 169, 87);color:white !important;text-decoration: none;padding: 7px;}
   [ng-class*=RB] {background-color: #041563;color:white !important;text-decoration: none;padding: 7px;}
   [ng-class*=QB] {background-color: #FCBF05;color:white !important;text-decoration: none;padding: 7px;}
   [ng-class*=TE] {background-color: #DB3E74;color:white !important;text-decoration: none;padding: 7px;}
@@ -61,5 +61,5 @@
 
   .md-subheader ._md-subheader-inner {padding: 3px 15px;}
 .team-card label {font-size:50%;}
-.sourceSelected {border-bottom:5px solid red;color: white !important;}
-.starredPlayer, .myTeam {border:1px solid red;}
+.sourceSelected {border-bottom:5px solid #DB3E74;color: white !important;}
+.starredPlayer, .myTeam {box-shadow: 0 4px 12px 0 rgba(105, 169, 87,.5),0 4px 4px 0 rgba(105, 169, 87,.5),0 8px 4px -4px rgba(105, 169, 87,.5);}
