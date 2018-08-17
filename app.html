@@ -194,7 +194,7 @@
                 <md-list-item ng-repeat="player in vm.players | orderBy:vm.sortType:sortReverse | filter:vm.searchTerm | filter:{pos:vm.buttonSearchTerm} track by $index"
                   ng-class="{{player.pos}}">
                   <div flex="5">
-                    <span ng-if="player.starred">FAV</span>
+                    <span ng-if="player.starred" style="color:gold;">FAV</span>
                     <span class="md-raised" ng-click="vm.starPlayer(player)">**</span>
                   </div>
                   <div flex="10" style="text-align:center;">{{player.rank}}</div>

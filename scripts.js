@@ -258,8 +258,14 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
         };
 
         vm.starPlayer = function (player) {
-          player.starred = true;
-          console.log(player)
+          // player.starred ? !player.starred : player.starred;
+          if (player.starred == undefined) {
+            player.starred = true;
+          } else if (player.starred) {
+            player.starred = false;
+          } else {
+            player.starred = true;
+          }
         }
 
         vm.downloadJson = function () {
