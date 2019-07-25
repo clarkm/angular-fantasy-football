@@ -19,3 +19,5 @@ to get this working
 
 
 serve it locally for debugging with: dev_appserver.py .
+website's served at localhost:8080
+the settings console is at localhost:8000
