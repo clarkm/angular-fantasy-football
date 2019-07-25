@@ -18,6 +18,9 @@ handlers:
 - url: /images
   static_dir: images
 
+- url: /local-scripts
+  static_dir: local-scripts
+
 - url: /fantasypros-output
   script: fantasypros-scraper.application
 
