@@ -88,7 +88,9 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
         vm.selectSource = function (sourceName) {
           vm.sourceSelected = sourceName;
           vm.loading = true;
-            myService.players('local-scripts/' + sourceName + '-output.json').then(function(data){
+          // uncomment the neccessary line below for local/production deployment:
+            // myService.players('local-scripts/' + sourceName + '-output.json').then(function(data){
+            myService.players(sourceName + '-output').then(function(data){
               vm.players = data;
             })
             .then(function() {vm.loading = false;});
