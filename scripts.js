@@ -79,7 +79,7 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
         vm.disableTeamCreator = false;
         vm.teamSelectNumber = 12;
         vm.roundCounter = 1;
-
+        vm.loading = false;
         vm.selectedTeam = null;
         vm.players = [];
         vm.maxPlayersPerTeam = 16;
@@ -87,9 +87,11 @@ app.controller('appController', ['myService','$scope','$http','$filter','$mdToas
 
         vm.selectSource = function (sourceName) {
           vm.sourceSelected = sourceName;
+          vm.loading = true;
             myService.players('local-scripts/' + sourceName + '-output.json').then(function(data){
               vm.players = data;
-            });
+            })
+            .then(function() {vm.loading = false;});
         }
 
         vm.addWriteIn = function (writeIn) {
