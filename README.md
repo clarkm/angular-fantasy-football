@@ -1,4 +1,4 @@
-Fantasy Football Scraper -- [footballscraper.appspot.com]
+Fantasy Football Scraper -- [footballscraper.appspot.com](https://footballscraper.appspot.com)
 ========================
 
 ##### fantasy football live draft helper app written in angularJS
