@@ -2,13 +2,14 @@ Fantasy Football Scraper -- [footballscraper.appspot.com](https://footballscrape
 ========================
 
 ##### fantasy football live draft helper app written in angularJS
-
-⋅⋅* Easily find top players to add to your fantasy team! Top 200 players are displayed; with sorting and filtering available on it. 
-⋅⋅* Player positions are color-coded for easily glancing and finding a desired player.
-⋅⋅* Sort by team, position, rank, bye week, etc. Then add a player to up to 12 teams.
-⋅⋅* Setting for 8,10,12 team leagues, and 15,16,17,18 players.
-⋅⋅* Much easier than manually crossing off players with pen & paper during a live draft!
-⋅⋅* Source player rank data from fantasypros.com along with other sources!
+<ul>
+<li>Easily find top players to add to your fantasy team! Top 200 players are displayed; with sorting and filtering available on it. 
+</li><li> Player positions are color-coded for easily glancing and finding a desired player.
+</li><li> Sort by team, position, rank, bye week, etc. Then add a player to up to 12 teams.
+</li><li> Setting for 8,10,12 team leagues, and 15,16,17,18 players.
+</li><li> Much easier than manually crossing off players with pen & paper during a live draft!
+</li><li> Source player rank data from fantasypros.com along with other sources!
+</li></ul>
 
 ### Build Instructions
 
